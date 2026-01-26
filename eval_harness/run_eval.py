@@ -20,6 +20,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config import CANDIDATE_MODEL, OLLAMA_BASE_URL, OLLAMA_TIMEOUT
 from ollama_runner import generate, check_ollama_available, list_models
 from assertions import is_valid_json, extract_json_from_text, parse_json, has_required_fields, contains_any
+from llm_judge import run_position_bias_test
+from metrics import PositionBiasMetrics
 
 
 # =============================================================================
@@ -392,12 +394,87 @@ def evaluate_case(
 def load_dataset(path: str) -> list[dict]:
     """Load JSONL dataset."""
     cases = []
+    if not os.path.exists(path):
+        print(f"Warning: Dataset not found at {path}")
+        return []
     with open(path, 'r') as f:
         for line in f:
             line = line.strip()
             if line:
                 cases.append(json.loads(line))
     return cases
+
+
+def run_position_bias_experiment(
+    cases: list[dict],
+    judge_model: str,
+    dry_run: bool = False,
+    limit: Optional[int] = None
+) -> dict:
+    """Run Position Bias experiment."""
+    print(f"\n{'='*60}")
+    print("EXPERIMENT: POSITION BIAS")
+    print(f"{'='*60}")
+    
+    if limit:
+        cases = cases[:limit]
+
+    print(f"Cases: {len(cases)} | Judge: {judge_model}")
+
+    results = []
+    bias_metrics = PositionBiasMetrics()
+
+    for i, case in enumerate(cases):
+        print(f"\n[{i+1}/{len(cases)}] {case.get('id', 'unknown')}")
+        
+        question = case.get("question", "")
+        response_a = case.get("response_a", "")
+        response_b = case.get("response_b", "")
+
+        print("  Running bias test...", end=" ", flush=True)
+        if dry_run:
+            bias_result = {
+                "verdict_ab": {"winner": "A", "success": True},
+                "verdict_ba": {"winner": "A", "success": True}, # Inconsistent
+                "consistent": False,
+                "first_position_preference_ab": True,
+                "first_position_preference_ba": False
+            }
+        else:
+            bias_result = run_position_bias_test(question, response_a, response_b, judge_model)
+        
+        # Update metrics
+        bias_metrics.total_pairs += 1
+        if not bias_result["consistent"]:
+            bias_metrics.flips += 1
+        if bias_result["verdict_ab"]["winner"] == "A":
+            bias_metrics.first_position_wins += 1
+        elif bias_result["verdict_ab"]["winner"] == "B":
+            bias_metrics.second_position_wins += 1
+        else:
+            bias_metrics.ties += 1
+
+        status = "✓" if bias_result["consistent"] else "⚠ FLIP"
+        print(f"{status}")
+        results.append({
+            "case_id": case.get("id"),
+            **bias_result
+        })
+
+    print(f"\n{'-'*60}")
+    print("RESULTS: POSITION BIAS")
+    print(f"{'-'*60}")
+    print(f"Flips: {bias_metrics.flips}/{bias_metrics.total_pairs} ({bias_metrics.flip_rate():.1%})")
+    print(f"Pos Bias: {bias_metrics.position_bias():+.1%}")
+
+    return {
+        "dataset": "position_bias",
+        "model": judge_model,
+        "timestamp": datetime.now().isoformat(),
+        "metrics": bias_metrics.to_dict(),
+        "results": results
+    }
+
 
 
 def run_evaluation(
@@ -550,7 +627,7 @@ def generate_csv_summary(results: list[dict], output_path: str):
 
 def main():
     parser = argparse.ArgumentParser(description="Run comprehensive LLM evaluation")
-    parser.add_argument("--dataset", choices=["extraction", "rag", "instruction", "all"], default="all")
+    parser.add_argument("--dataset", choices=["extraction", "rag", "instruction", "bias", "all"], default="all")
     parser.add_argument("--dry-run", action="store_true", help="Run with mock data")
     parser.add_argument("--limit", type=int, default=None, help="Limit cases per dataset")
     parser.add_argument("--model", default=CANDIDATE_MODEL, help="Model to evaluate")
@@ -581,7 +658,25 @@ def main():
     
     # Run evaluations
     all_results = []
-    for name, cases in datasets.items():
+    
+    # Position Bias (Special handling)
+    if args.dataset in ["bias", "all"]:
+        # Only run if bias cases exist (they might be in instruction_cases or separate?)
+        # For now let's assume a bias_cases.jsonl or use subset of instruction
+        bias_path = datasets_dir / "bias_cases.jsonl"
+        if bias_path.exists():
+            bias_cases = load_dataset(bias_path)
+            bias_res = run_position_bias_experiment(bias_cases, args.model, args.dry_run, args.limit)
+            
+            # Save bias result
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            result_path = results_dir / f"position_bias_{timestamp}.json"
+            with open(result_path, 'w') as f:
+                json.dump(bias_res, f, indent=2)
+            print(f"Results saved: {result_path}")
+        else:
+            if args.dataset == "bias":
+                print("Warning: bias_cases.jsonl not found.")
         result = run_evaluation(
             name, cases, args.model,
             dry_run=args.dry_run,

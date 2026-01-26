@@ -2,10 +2,10 @@
 Configuration for evaluation experiments.
 """
 
-# Model configuration for MacBook M4 with 15GB RAM
+# Model configuration for Mac mini M4 with 16GB RAM
 # Using models available in Ollama
-CANDIDATE_MODEL = "llama3:8b-instruct-q4_K_M"
-JUDGE_MODEL = "qwen2.5:7b-instruct-q4_K_M"
+CANDIDATE_MODEL = "llama3:8b"
+JUDGE_MODEL = "qwen2.5:7b"
 
 # Ollama API configuration
 OLLAMA_BASE_URL = "http://localhost:11434"

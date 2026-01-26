@@ -86,8 +86,11 @@ brew install ollama
 ollama serve
 
 # Pull required models (in another terminal)
-ollama pull llama3.1:8b    # Candidate model
-ollama pull qwen2.5:7b     # Judge model
+# Pull required models (in another terminal)
+ollama pull llama3:8b      # Candidate model (v3.1 8B Instruct)
+ollama pull qwen2.5:7b     # Judge model (v2.5 7B Instruct)
+
+> **Note**: These exact model tags are the ones used in the paper experiments. Using different versions may yield different results.
 
 # Install Python dependencies (using virtual environment)
 cd eval_harness
@@ -100,18 +103,19 @@ pip install -r requirements.txt
 
 ```bash
 cd eval_harness
-source venv/bin/activate   # Activate virtual environment
+source venv/bin/activate
 
-# Run all experiments
-python run_experiments.py --all
+# Run all experiments (Extraction, RAG, Instruction)
+python run_eval.py --dataset all
 
 # Run individual experiments
-python run_experiments.py --structured    # Exp 1: JSON output reliability
-python run_experiments.py --prompt        # Exp 2: Prompt engineering impact  
-python run_experiments.py --bias          # Exp 3: Position bias demonstration
+python run_eval.py --dataset extraction   # Experiment 1: JSON reliability
+python run_eval.py --dataset rag          # Experiment 2: RAG grounding
+python run_eval.py --dataset instruction  # Experiment 3: Prompt sensitivity
+python run_eval.py --dataset bias         # Failure Analysis: Position bias
 
-# Dry run (without Ollama, for testing)
-python run_experiments.py --all --dry-run --limit 5
+# Dry run (testing without Ollama)
+python run_eval.py --dry-run --limit 2
 ```
 
 ### Experiment Details
@@ -119,10 +123,13 @@ python run_experiments.py --all --dry-run --limit 5
 | Experiment | Cases | Description |
 |------------|-------|-------------|
 | Structured Output | 20 | JSON validity rates with baseline vs. improved prompts |
+| RAG Grounding | 15 | Citation accuracy and groundedness checks |
 | Prompt Iteration | 15 | Format compliance improvements from prompt engineering |
-| Position Bias | 10 | Demonstrates ~10% first-position preference in LLM-as-judge |
+| **Total** | **50** | **Main Experiment Suite** |
+| Position Bias | 10 | (Separate) Demonstrates LLM-as-judge sensitivity |
 
 Results are saved to `eval_harness/results/` as timestamped JSON files.
+Ablation study logs are preserved in `eval_harness/results_ablation/`.
 
 ### Reproducing Paper Results
 
