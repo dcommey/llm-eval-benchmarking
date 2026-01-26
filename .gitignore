@@ -1,16 +1,17 @@
 # LaTeX
-*.aux
-*.bbl
-*.blg
-*.fdb_latexmk
-*.fls
-*.log
-*.out
-*.toc
-*.synctex.gz
-*.dvi
-*.nav
-*.snm
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz
+paper/*.dvi
+paper/*.nav
+paper/*.snm
+paper/main.pdf
 
 # Python
 __pycache__/
@@ -31,5 +32,6 @@ experiment.log
 .vscode/
 .idea/
 
-# Keep main.pdf as it is the final output
-!main.pdf
+# Large artifacts
+eval_harness/outputs/*.jsonl
+!eval_harness/outputs/sample_results.jsonl

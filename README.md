@@ -9,54 +9,31 @@ A comprehensive survey and reproducible experimental harness demonstrating that 
 - LaTeX distribution (TeX Live, MacTeX, or MiKTeX)
 - `latexmk` (included in most TeX distributions)
 
-### Build Commands
+## Build Commands
 
-**Using Make:**
+To build the paper:
+
 ```bash
+cd paper
 make pdf
-```
-
-**Using latexmk directly:**
-```bash
-latexmk -pdf main.tex
-```
-
-**Clean build artifacts:**
-```bash
-make clean
 ```
 
 ## Project Structure
 
 ```
-llm-eval-benchmarking-tex/
-├── main.tex                    # Main document
-├── sections/                   # All paper sections
-│   ├── 00_abstract.tex
-│   ├── 01_introduction.tex
-│   ├── 02_quality_taxonomy.tex
-│   ├── 03_eval_methods.tex
-│   ├── 04_testset_design.tex
-│   ├── 05_metrics_scoring.tex
-│   ├── 06_rag_evaluation.tex
-│   ├── 07_llm_judges.tex
-│   ├── 08_case_studies.tex
-│   ├── 09_failure_modes.tex
-│   ├── 10_best_practices_checklist.tex
-│   ├── 11_future_directions.tex
-│   ├── 12_limitations.tex
-│   └── 13_conclusion.tex
-├── bib/
-│   └── references.bib          # Bibliography
-├── figures/
-│   └── pipeline_overview.tex   # TikZ diagram
-├── appendices/
-│   ├── appendix_a_rubrics.tex
-│   └── appendix_b_example_tests.tex
-└── artifacts/                  # Standalone markdown templates
-    ├── evaluation_checklist.md
-    ├── rubric_template.md
-    └── testset_template.md
+llm-eval-benchmarking/
+├── paper/                      # LaTeX source
+│   ├── main.tex
+│   ├── sections/
+│   ├── bib/
+│   └── tables/
+├── eval_harness/               # Reproducible experiments
+│   ├── run_eval.py
+│   ├── datasets/
+│   └── requirements.txt
+├── LICENSE
+├── CITATION.cff
+└── README.md
 ```
 
 ## How to Cite This Work

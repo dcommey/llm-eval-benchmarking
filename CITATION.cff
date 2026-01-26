@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Commey"
+    given-names: "Daniel"
+title: "When 'Better' Prompts Hurt: Evaluation-Driven Iteration for LLM Applications"
+version: 1.0.0
+date-released: 2026-01-26
+url: "https://github.com/dcommey/llm-eval-benchmarking"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Commey"
+    given-names: "Daniel"
+  title: "When 'Better' Prompts Hurt: Evaluation-Driven Iteration for LLM Applications"
+  year: 2026
+  notes: "Survey/Tutorial Paper"
