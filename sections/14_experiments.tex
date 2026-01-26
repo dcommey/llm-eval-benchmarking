@@ -7,7 +7,7 @@ This section demonstrates how to apply evaluation-driven iteration using a repro
 
 \subsection{Experimental Setup}
 
-We ran all experiments locally using Ollama on a MacBook M4 with 15GB unified memory. The candidate models were \texttt{llama3:8b-instruct} and \texttt{qwen2.5:7b-instruct}, both with Q4\_K\_M quantization. To reduce variance, we used deterministic decoding (temperature $= 0$) and fixed the maximum output length. Each test case was executed once per prompt version per model.
+We ran all experiments locally using Ollama on a MacBook M4 with 16GB unified memory. The candidate models were \texttt{llama3:8b-instruct} and \texttt{qwen2.5:7b-instruct}, both with Q4\_K\_M quantization. To reduce variance, we used deterministic decoding (temperature $= 0$) and fixed the maximum output length. Each test case was executed once per prompt version per model.
 
 We evaluated three curated test suites covering common LLM application patterns. The \textbf{Extraction} suite (20 cases) tests JSON schema compliance and required field extraction across contact information, invoice parsing, calendar events, and support tickets. The \textbf{RAG} suite (15 cases) tests source-grounded question answering where responses must cite provided sources and avoid introducing external claims. The \textbf{Instruction} suite (15 cases) tests format constraints, refusal behavior, and output pattern matching. All test cases are included in the repository as JSONL files for reproducibility.
 
