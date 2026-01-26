@@ -1,6 +1,6 @@
-# Evaluating LLM Applications: Benchmarks, Metrics, Test Sets, and Monitoring Pipelines
+# When ``Better'' Prompts Hurt: Evaluation-Driven Iteration for LLM Applications
 
-A comprehensive LaTeX survey/tutorial paper on evaluating Large Language Model applications.
+A comprehensive survey and reproducible experimental harness demonstrating that generic prompt improvements are not monotonic.
 
 ## Building the Paper
 
@@ -65,8 +65,8 @@ If you find this survey useful, please cite it as:
 
 ```bibtex
 @article{llm-eval-survey-2026,
-  title   = {Evaluating LLM Applications: Benchmarks, Metrics, Test Sets, and Monitoring Pipelines},
-  author  = {[Your Name]},
+  title   = {When "Better" Prompts Hurt: Evaluation-Driven Iteration for LLM Applications},
+  author  = {Commey, Daniel},
   year    = {2026},
   note    = {Survey/Tutorial Paper}
 }
