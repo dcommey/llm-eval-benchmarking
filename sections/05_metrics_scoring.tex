@@ -1,0 +1,28 @@
+%% 05_metrics_scoring.tex - Metrics and Scoring
+
+\section{Metrics and Scoring}
+\label{sec:metrics-scoring}
+
+Choosing appropriate metrics is critical for meaningful evaluation. While exact match works for deterministic tasks, natural language requires semantic assessment.
+
+\subsection{Semantic Similarity}
+
+Embedding-based metrics address the semantic gap by comparing meaning rather than surface form. \textbf{BERTScore} computes similarity between contextual embeddings, correlating better with human judgment than n-gram metrics like BLEU or ROUGE~\citep{zhang2020bertscore}. \textbf{BLEURT} is fine-tuned on human ratings to predict quality directly~\citep{sellam2020bleurt}. For retrieval, cosine similarity between sentence embeddings provides a directional signal of relevance.
+
+\subsection{Factual Accuracy}
+
+For fact-centric tasks, the \textbf{FActScore} methodology decomposes outputs into atomic claims and verifies each against a knowledge source~\citep{min2023factscore}. This granular approach reveals hallucinations that holistic scoring might miss. For example, a biography might be 90\% correct generally but fail on specific dates.
+
+\begin{empirical}[FActScore Findings]
+Min et al.\ found that ChatGPT achieved only 58\% factual precision on generated biographies, meaning 42\% of atomic claims were unsupported. Retrieval augmentation improved this to 66\%.
+\end{empirical}
+
+\subsection{Truthfulness and Calibration}
+
+\textbf{Truthfulness} measures whether models avoid reproducing common misconceptions. The TruthfulQA benchmark shows that larger models can be \emph{less} truthful because they learn human misconceptions more effectively~\citep{lin2022truthfulqa}.
+
+\textbf{Calibration} measures whether a model's confidence scores predict correctness. Well-calibrated models enable selective answering, where low-confidence responses are routed to human review. This is essential for high-stakes applications where errors are costly.
+
+\subsection{Inter-Rater Reliability}
+
+When using human evaluators, measuring agreement ensures rubric reliability. \textbf{Cohen's Kappa} measures agreement between two raters adjusted for chance. A Kappa $> 0.6$ indicates substantial agreement; scores below 0.4 suggest the rubric is ambiguous and needs revision. \textbf{Krippendorff's Alpha} extends this to multiple raters and missing data.

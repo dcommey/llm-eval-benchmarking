@@ -1,0 +1,17 @@
+%% 00_abstract.tex - Abstract and Keywords
+
+\begin{abstract}
+Evaluating Large Language Model (LLM) applications presents challenges distinct from traditional software testing. Unlike deterministic systems, LLMs produce probabilistic outputs influenced by prompt phrasing, model updates, and subtle distribution shifts. This paper provides a structured methodology for evaluating LLM-powered applications through an iterative workflow: define quality requirements, test against curated suites, diagnose failures, and fix before deployment.
+
+We introduce the Minimum Viable Evaluation Suite (MVES) framework, defining tiered requirements for general LLM applications, retrieval-augmented systems, and agentic workflows. This paper synthesizes evaluation methodologies from the literature and provides a reproducible harness for local testing. We systematically compare trade-offs in correlation with human judgment, cost, and execution time. Special attention is given to LLM-as-judge approaches, including analysis of failure modes such as position bias, verbosity bias, and self-preference.
+
+In controlled local experiments using Ollama (Llama 3 8B Instruct and Qwen 2.5 7B Instruct), we observe that generic prompt improvements can degrade performance on structured tasks. Extraction pass rate dropped from 100\% to 90\% (Llama 3) and RAG compliance from 93.3\% to 80\% when replacing task-specific prompts with generic templates. However, Qwen 2.5 demonstrated superior robustness, maintaining 100\% extraction accuracy. These results motivate task-specific, evaluation-driven prompt iteration rather than universal prompt recipes.
+
+All test suites, evaluation harnesses, and results are included for reproducibility. This paper serves researchers and practitioners seeking evidence-based approaches to LLM evaluation.
+\end{abstract}
+
+\paragraph{Keywords.}
+Large language models, evaluation, benchmarks, metrics, RAG, retrieval-augmented generation, LLM-as-judge, prompt engineering, regression testing, MVES.
+
+\paragraph{Contributions.}
+This paper makes six contributions. First, we introduce the \textbf{MVES framework}: a tiered standard defining minimum evaluation requirements for general LLM applications (MVES-Core), retrieval-augmented systems (MVES-RAG), and agentic workflows (MVES-Agentic). Second, we provide a \textbf{synthesis of evaluation methods} from literature, discussing correlation with human judgment, cost per 1,000 examples, and execution time. Third, we present a \textbf{taxonomy of quality dimensions} distinguishing correctness, helpfulness, harmlessness, groundedness, and format adherence. Fourth, we give a \textbf{detailed analysis of LLM-as-judge failure modes}, including position bias, verbosity bias, self-preference, style bias, and instruction leakage. Fifth, we provide \textbf{actionable checklists} for test set design, metric selection, human evaluation rubrics, and production monitoring. Sixth, we present \textbf{original experiments} demonstrating that task-specific prompts can outperform generic improvements on structured tasks, using local inference for full reproducibility.

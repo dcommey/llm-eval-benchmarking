@@ -1,0 +1,78 @@
+{
+  "experiment": "structured_output",
+  "model": "llama3.1:8b",
+  "timestamp": "2026-01-25T06:35:57.257761",
+  "cases": [],
+  "baseline": {
+    "results": [
+      {
+        "case_id": "EXT-001",
+        "success": true,
+        "latency_ms": 100,
+        "json_valid": true,
+        "has_required_fields": true,
+        "missing_fields": [],
+        "response": "{\"name\": \"Test\", \"date\": \"2024-01-01\", \"location\": \"Test City\", \"amount\": 100}"
+      },
+      {
+        "case_id": "EXT-002",
+        "success": true,
+        "latency_ms": 100,
+        "json_valid": true,
+        "has_required_fields": true,
+        "missing_fields": [],
+        "response": "{\"name\": \"Test\", \"date\": \"2024-01-01\", \"location\": \"Test City\", \"amount\": 100}"
+      }
+    ],
+    "aggregate": {
+      "total_cases": 2,
+      "successful_calls": 2,
+      "success_rate": 1.0,
+      "json_valid_rate": 1.0,
+      "required_fields_rate": 1.0,
+      "format_compliance_rate": 0.0,
+      "mean_latency_ms": 100,
+      "median_latency_ms": 100.0,
+      "std_latency_ms": 0.0,
+      "mean_rubric_score": 0.0
+    }
+  },
+  "improved": {
+    "results": [
+      {
+        "case_id": "EXT-001",
+        "success": true,
+        "latency_ms": 95,
+        "json_valid": true,
+        "has_required_fields": true,
+        "missing_fields": [],
+        "response": "{\"name\": \"Test\", \"date\": \"2024-01-01\", \"location\": \"Test City\", \"amount\": 100}"
+      },
+      {
+        "case_id": "EXT-002",
+        "success": true,
+        "latency_ms": 95,
+        "json_valid": true,
+        "has_required_fields": true,
+        "missing_fields": [],
+        "response": "{\"name\": \"Test\", \"date\": \"2024-01-01\", \"location\": \"Test City\", \"amount\": 100}"
+      }
+    ],
+    "aggregate": {
+      "total_cases": 2,
+      "successful_calls": 2,
+      "success_rate": 1.0,
+      "json_valid_rate": 1.0,
+      "required_fields_rate": 1.0,
+      "format_compliance_rate": 0.0,
+      "mean_latency_ms": 95,
+      "median_latency_ms": 95.0,
+      "std_latency_ms": 0.0,
+      "mean_rubric_score": 0.0
+    }
+  },
+  "improvement": {
+    "json_valid_rate_delta": 0.0,
+    "json_valid_rate_delta_pct": 0.0
+  }
+}

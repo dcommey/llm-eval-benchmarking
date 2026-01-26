@@ -1,0 +1,15 @@
+\begin{table}[h]
+\centering
+\caption{Evaluation results: Baseline vs. Improved prompts.}
+\label{tab:eval-results}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{Dataset} & \textbf{Cases} & \multicolumn{2}{c}{\textbf{Baseline}} & \multicolumn{2}{c}{\textbf{Improved}} & \textbf{$\Delta$} \\
+ & & Pass\% & Check\% & Pass\% & Check\% & \\
+\midrule
+Extraction & 20 & 100.0 & 100.0 & 90.0 & 95.5 & +-4.5 \\
+Rag & 15 & 93.3 & 100.0 & 80.0 & 85.7 & +-14.3 \\
+Instruction & 15 & 53.3 & 79.2 & 66.7 & 75.0 & +-4.2 \\
+\bottomrule
+\end{tabular}
+\end{table}

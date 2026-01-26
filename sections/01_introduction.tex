@@ -1,0 +1,40 @@
+%% 01_introduction.tex - Introduction
+
+\section{Introduction}
+\label{sec:introduction}
+
+The deployment of Large Language Models (LLMs) in production applications has accelerated dramatically. Organizations now use LLMs for customer support, document summarization, code generation, knowledge retrieval, and countless other tasks. Yet evaluating these systems remains surprisingly difficult. Traditional software testing, which assumes deterministic outputs for given inputs, does not translate directly to LLM-powered applications.
+
+\subsection{Why LLM Evaluation Differs from Traditional Testing}
+
+Consider a conventional API: given a well-formed request, the response is deterministic and can be validated against an expected output. LLM applications violate nearly every assumption underlying this paradigm.
+
+The first challenge is \textbf{non-determinism}. Even with identical prompts and temperature set to zero, LLMs may produce slightly different outputs across inference calls due to hardware numerics, sampling implementations, and batching effects~\citep{ouyang2022training}. This variability means that exact-match testing, the foundation of traditional software verification, becomes unreliable.
+
+The second challenge is \textbf{output space complexity}. Natural language responses can be semantically equivalent while being lexically distinct. The statements ``The capital of France is Paris'' and ``Paris serves as France's capital'' convey identical information but differ textually. Evaluating semantic equivalence requires more sophisticated methods than string comparison.
+
+The third challenge involves \textbf{implicit specifications}. User expectations for ``good'' responses are often context-dependent and difficult to formalize. A concise answer may be preferred in one context and insufficient in another. Unlike APIs with explicit schemas, LLM quality is often in the eye of the beholder.
+
+Finally, \textbf{model churn} complicates evaluation over time. LLM providers frequently update their models, sometimes without explicit versioning. A system that worked yesterday may behave differently today~\citep{sainz2023nlp}. Continuous evaluation becomes necessary to detect regressions introduced by upstream model changes.
+
+\subsection{Key Risks in LLM Applications}
+
+Insufficient evaluation exposes applications to several categories of risk that must be addressed before deployment.
+
+\textbf{Hallucination} refers to the generation of plausible-sounding but factually incorrect statements. This phenomenon has been extensively documented in the literature~\citep{ji2023hallucination, lin2022truthfulqa}. In high-stakes domains such as healthcare or legal advice, hallucinations can cause material harm. Evaluation must specifically test for factual accuracy against verified sources.
+
+\textbf{Safety violations} occur when LLMs produce harmful, biased, or inappropriate content. Without appropriate guardrails, models may respond to adversarial prompts in dangerous ways. Red-teaming and adversarial testing are essential to surface these failure modes before deployment~\citep{perez2022red, ganguli2022red}. Safety evaluation should cover toxic content, privacy violations, and refusal of genuinely harmful requests.
+
+\textbf{Prompt drift} emerges as prompts are iteratively refined during development. Subtle changes to system prompts or few-shot examples may have unintended effects on unrelated behaviors. Without regression testing, these regressions go undetected until reported by users. Comprehensive test suites help ensure that improvements in one area do not cause degradation in others.
+
+\textbf{Distribution shift} occurs when production inputs differ from development test cases. Users may phrase requests in unexpected ways, submit adversarial inputs, or use the system for unanticipated purposes. Evaluation should include realistic samples from production, not just curated examples that developers find convenient.
+
+\subsection{What This Paper Provides}
+
+This paper provides a complete evaluation harness with 50 curated test cases spanning extraction (20 cases), RAG question-answering (15 cases), and instruction-following (15 cases). We demonstrate evaluation-driven iteration using local inference via Ollama, enabling full reproducibility without API costs.
+
+Our experiments reveal a counterintuitive finding: generic prompt improvements are not monotonic. Adding a ``helpful assistant'' system wrapper with explicit rules \emph{degraded} extraction accuracy by 10\% and RAG compliance by 13\% on Llama 3 8B, while \emph{improving} instruction-following by 13\%. A four-condition ablation isolates the mechanism: the system wrapper itself has no effect; the degradation comes from generic rules conflicting with task-specific constraints.
+
+The practical implication is clear: prompt changes must be validated against task-specific test suites, not assumed beneficial based on conventional wisdom. The evaluation loop described in Section~\ref{sec:eval-loop} operationalizes this insight.
+
+\paragraph{Artifacts.} All code, datasets, and experiment logs are available at: \url{https://github.com/example/llm-eval-harness}

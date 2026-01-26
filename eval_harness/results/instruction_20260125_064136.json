@@ -1,0 +1,195 @@
+{
+  "dataset": "instruction",
+  "model": "llama3.1:8b",
+  "timestamp": "2026-01-25T06:41:36.725272",
+  "baseline": {
+    "aggregate": {
+      "total_cases": 3,
+      "all_checks_passed": 0,
+      "all_pass_rate": 0.0,
+      "total_checks": 7,
+      "checks_passed": 1,
+      "check_pass_rate": 0.1429,
+      "mean_latency_ms": 80.0
+    },
+    "results": [
+      {
+        "case_id": "ins-001",
+        "task_type": "instruction_following",
+        "category": "formatting",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 80,
+        "checks_passed": 0,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "bullet_count",
+            "passed": false,
+            "expected": 3,
+            "actual": 0
+          }
+        ],
+        "response_preview": "TASK-1234"
+      },
+      {
+        "case_id": "ins-002",
+        "task_type": "instruction_following",
+        "category": "formatting",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 80,
+        "checks_passed": 0,
+        "checks_total": 3,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": false,
+            "message": "Invalid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": false,
+            "missing": [
+              "answer",
+              "citations"
+            ]
+          },
+          {
+            "check": "answer_word_count",
+            "passed": false,
+            "expected": 12,
+            "actual": 1
+          }
+        ],
+        "response_preview": "TASK-1234"
+      },
+      {
+        "case_id": "ins-003",
+        "task_type": "instruction_following",
+        "category": "formatting",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 80,
+        "checks_passed": 1,
+        "checks_total": 3,
+        "check_details": [
+          {
+            "check": "must_include",
+            "passed": false,
+            "missing": [
+              "offline evaluation"
+            ]
+          },
+          {
+            "check": "single_sentence",
+            "passed": true,
+            "sentence_count": 1
+          },
+          {
+            "check": "must_end_with_period",
+            "passed": false
+          }
+        ],
+        "response_preview": "TASK-1234"
+      }
+    ]
+  },
+  "improved": {
+    "aggregate": {
+      "total_cases": 3,
+      "all_checks_passed": 0,
+      "all_pass_rate": 0.0,
+      "total_checks": 7,
+      "checks_passed": 1,
+      "check_pass_rate": 0.1429,
+      "mean_latency_ms": 80.0
+    },
+    "results": [
+      {
+        "case_id": "ins-001",
+        "task_type": "instruction_following",
+        "category": "formatting",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 80,
+        "checks_passed": 0,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "bullet_count",
+            "passed": false,
+            "expected": 3,
+            "actual": 0
+          }
+        ],
+        "response_preview": "TASK-1234"
+      },
+      {
+        "case_id": "ins-002",
+        "task_type": "instruction_following",
+        "category": "formatting",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 80,
+        "checks_passed": 0,
+        "checks_total": 3,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": false,
+            "message": "Invalid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": false,
+            "missing": [
+              "answer",
+              "citations"
+            ]
+          },
+          {
+            "check": "answer_word_count",
+            "passed": false,
+            "expected": 12,
+            "actual": 1
+          }
+        ],
+        "response_preview": "TASK-1234"
+      },
+      {
+        "case_id": "ins-003",
+        "task_type": "instruction_following",
+        "category": "formatting",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 80,
+        "checks_passed": 1,
+        "checks_total": 3,
+        "check_details": [
+          {
+            "check": "must_include",
+            "passed": false,
+            "missing": [
+              "offline evaluation"
+            ]
+          },
+          {
+            "check": "single_sentence",
+            "passed": true,
+            "sentence_count": 1
+          },
+          {
+            "check": "must_end_with_period",
+            "passed": false
+          }
+        ],
+        "response_preview": "TASK-1234"
+      }
+    ]
+  },
+  "improvement": {
+    "all_pass_rate_delta": 0.0,
+    "check_pass_rate_delta": 0.0
+  }
+}

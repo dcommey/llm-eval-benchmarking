@@ -1,0 +1,170 @@
+%% 06_rag_evaluation.tex - RAG Evaluation
+
+\section{RAG Evaluation}
+\label{sec:rag-evaluation}
+
+Retrieval-Augmented Generation (RAG) systems combine information retrieval with LLM generation~\citep{lewis2020retrieval}. Evaluating these systems requires assessing both components and their interaction. This section presents the RAGAS framework and other approaches for comprehensive RAG evaluation.
+
+\subsection{Decomposing RAG Evaluation}
+
+A RAG system operates in two stages. In the retrieval stage, the system retrieves relevant documents from a corpus given a query. In the generation stage, it produces a response given the query and retrieved documents. Failures can occur in either stage or in their integration, so effective evaluation must isolate these sources to enable targeted improvement.
+
+\subsection{The RAGAS Framework}
+
+RAGAS (Retrieval Augmented Generation Assessment)~\citep{es2024ragas} provides a reference-free evaluation framework with four key metrics. Table~\ref{tab:ragas-metrics} summarizes these metrics.
+
+\begin{table}[h]
+\centering
+\caption{The RAGAS metrics for RAG evaluation.}
+\label{tab:ragas-metrics}
+\begin{tabular}{@{}lp{7cm}l@{}}
+\toprule
+\textbf{Metric} & \textbf{Definition} & \textbf{Measures} \\
+\midrule
+Faithfulness & Fraction of claims in the answer that can be inferred from the context & Generation \\
+\addlinespace
+Answer Relevance & Semantic similarity between the answer and the question & Generation \\
+\addlinespace
+Context Precision & Whether the relevant context chunks are ranked higher & Retrieval \\
+\addlinespace
+Context Recall & Fraction of ground truth that is covered by retrieved context & Retrieval \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Faithfulness is calculated as the ratio of claims supported by context to total claims in the answer:
+\begin{equation}
+\text{Faithfulness} = \frac{\text{Number of claims supported by context}}{\text{Total claims in answer}}
+\end{equation}
+
+The following example illustrates faithfulness evaluation:
+
+\begin{promptbox}[User Query]
+\small What are the side effects of aspirin?
+\end{promptbox}
+
+\begin{responsebox}[Retrieved Context]
+\small Aspirin may cause stomach irritation and bleeding. It can also increase the risk of kidney problems in high doses. Rare side effects include allergic reactions.
+\end{responsebox}
+
+\begin{responsebox}[LLM Answer]
+\small Aspirin can cause stomach irritation, bleeding, and may affect kidney function at high doses. It also helps prevent heart attacks in some patients.
+\end{responsebox}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{Faithfulness analysis of the above answer.}
+\begin{tabular}{@{}p{6cm}cc@{}}
+\toprule
+\textbf{Claim in Answer} & \textbf{In Context?} & \textbf{Status} \\
+\midrule
+Aspirin can cause stomach irritation & \textcolor{green!60!black}{\checkmark} Yes & Supported \\
+Aspirin can cause bleeding & \textcolor{green!60!black}{\checkmark} Yes & Supported \\
+May affect kidney function at high doses & \textcolor{green!60!black}{\checkmark} Yes & Supported \\
+Helps prevent heart attacks & \textcolor{red!60!black}{$\times$} No & \textbf{Unsupported} \\
+\midrule
+\textbf{Faithfulness Score} & \multicolumn{2}{c}{\textbf{3/4 = 75\%}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{warningbox}
+The claim about preventing heart attacks is correct but \textbf{unsupported by the context}. This is a ``correct but unfaithful'' response, which is a critical failure mode in RAG systems.
+\end{warningbox}
+
+\subsection{Retrieval Quality Metrics}
+
+Standard information retrieval metrics apply to the retrieval component of RAG systems. Precision@k measures the fraction of top-k retrieved documents that are relevant. Recall@k measures the fraction of all relevant documents that appear in the top-k results. Mean Reciprocal Rank (MRR) averages the reciprocal ranks of the first relevant document across queries. Normalized Discounted Cumulative Gain (nDCG) accounts for graded relevance and position, giving more credit to relevant documents appearing earlier.
+
+\begin{lstlisting}[basicstyle=\small\ttfamily,language=Python]
+def precision_at_k(retrieved: list, relevant: set, k: int) -> float:
+    """Compute Precision@k for retrieval evaluation."""
+    top_k = retrieved[:k]
+    relevant_in_top_k = sum(1 for doc in top_k if doc in relevant)
+    return relevant_in_top_k / k
+
+def reciprocal_rank(retrieved: list, relevant: set) -> float:
+    """Compute reciprocal rank (for MRR calculation)."""
+    for i, doc in enumerate(retrieved):
+        if doc in relevant:
+            return 1.0 / (i + 1)
+    return 0.0
+\end{lstlisting}
+
+Relevance assessment requires labels indicating which documents are relevant for each query. These can be obtained through manual annotation by domain experts, implicit signals such as documents that users clicked, or LLM-based relevance judgments with appropriate calibration.
+
+\subsection{The ``Correct but Unsupported'' Failure Mode}
+
+A subtle failure occurs when the LLM generates a correct answer using its parametric knowledge rather than the retrieved documents. This is problematic because users cannot verify the answer against provided sources, the system may hallucinate when parametric knowledge is wrong, and it undermines the purpose of grounded, attributable responses.
+
+\begin{badexample}[Correct but Unsupported]
+\small
+\textbf{Query:} Who wrote Romeo and Juliet? \\
+\textbf{Context:} [Document about Shakespeare's biography, mentioning only Hamlet] \\
+\textbf{Answer:} ``William Shakespeare wrote Romeo and Juliet.'' \\
+\textbf{Problem:} Answer is correct but not supported by the provided context. The model used parametric knowledge instead of retrieved documents.
+\end{badexample}
+
+Detection involves comparing responses with and without retrieval; if answers are identical, the model may be ignoring context. Mitigation strategies include prompt engineering to emphasize grounding, fine-tuning on attribution data, and filtering responses that lack citations.
+
+\paragraph{Before/After Prompt Comparison.} The following illustrates how explicit grounding constraints fix this failure:
+
+\begin{badexample}[Baseline Prompt]
+\small Answer the question using the provided sources.
+\end{badexample}
+
+\begin{goodexample}[Improved Prompt]
+\small Answer using ONLY the provided sources. Cite each claim with [1], [2], etc. If the sources do not contain the answer, respond ``I don't know based on the provided sources.''
+\end{goodexample}
+
+With the improved prompt, the model responds: ``The sources discuss Shakespeare's biography and mention Hamlet, but do not reference Romeo and Juliet. I don't know based on the provided sources.'' This is a correct refusal that our evaluation harness catches as a pass.
+
+\subsection{Citation Coverage and Quality}
+
+When RAG systems include citations, evaluating them explicitly provides insight into attribution quality. Table~\ref{tab:citation-quality} defines the key metrics.
+
+\begin{table}[h]
+\centering
+\caption{Citation quality metrics for RAG systems.}
+\label{tab:citation-quality}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Metric} & \textbf{Formula} \\
+\midrule
+Citation Density & Citations per 100 words of response \\
+Citation Precision & $\frac{\text{Citations that support claims}}{\text{Total citations}}$ \\
+Citation Recall & $\frac{\text{Claims with citations}}{\text{Total claims}}$ \\
+Source Diversity & Number of unique sources cited \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Human annotators or LLM judges verify that cited passages actually support the claims made. This verification step catches cases where citations are present but do not substantiate the associated claim.
+
+\subsection{End-to-End vs.\ Component Evaluation}
+
+End-to-end evaluation measures final answer quality regardless of intermediate steps, reflecting user experience and providing simpler implementation. However, it makes diagnosing failures difficult. Component evaluation measures retrieval and generation separately, isolating issues and enabling targeted fixes, but may miss integration bugs. The recommended approach uses both: end-to-end evaluation ensures overall quality while component evaluation identifies where to invest improvement effort.
+
+\subsection{Tutorial: The RAG Evaluation Loop}
+
+To illustrate the evaluation loop in practice, consider a system prone to hallucinating information not present in the retrieved context.
+
+\begin{enumerate}
+    \item \textbf{Goal}: Ensure answers are strictly grounded in retrieved documents.
+    \item \textbf{Test}: Run a golden set including questions where the answer is known \emph{outside} the system but absent from the retrieved context (see ``Correct but Unsupported'' above).
+    \item \textbf{Failure}: The baseline prompt answers from parametric memory:
+    \begin{badexample}
+    \textbf{Question}: Is SSO included in the Business plan? \\
+    \textbf{Retrieved}: [Business Plan features: shared workspaces, priority support.] \\
+    \textbf{Output}: Yes, SSO is included. (Incorrectly using outside knowledge)
+    \end{badexample}
+    \item \textbf{Fix}: Update prompt to require citations and explicit refusal: ``Answer using ONLY the sources. Cite every claim like [1]. If the answer is not in the sources, say 'I don't know'.''
+    \item \textbf{Re-test}: The improved prompt correctly refuses:
+    \begin{goodexample}
+    \textbf{Output}: I don't know based on the provided sources, as SSO is not listed in the Business Plan features [1].
+    \end{goodexample}
+\end{enumerate}
+
+This iteration demonstrates how specific failure modes (grounding violations) drive prompt engineering decisions.
+

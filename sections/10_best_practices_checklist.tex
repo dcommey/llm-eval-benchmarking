@@ -1,0 +1,25 @@
+\section{Best Practices Summary}
+\label{sec:checklist}
+
+This section summarizes the most critical rules for LLM evaluation. For comprehensive checklists covering Pre-Deployment, Production Monitoring, RAG, and Human Evaluation, see Appendix~\ref{sec:appendix}.
+
+\subsection{The Golden Rules of ML Evaluation}
+
+\begin{enumerate}[itemsep=4pt, leftmargin=2.5em]
+    \item \textbf{Define quality dimensions first.} Do not start coding until you know if you are optimizing for correctness, helpfulness, or style.
+    
+    \item \textbf{Build a golden test set immediately.} Start with 20 manual examples. Do not rely on "vibes" or ad-hoc testing.
+    
+    \item \textbf{Separate offline and online metrics.} Use detailed offline suites for correctness/regression testing; use latency/error-rate/feedback for production monitoring.
+    
+    \item \textbf{Version control everything.} Prompts, code, and \emph{data} must be versioned together to trace regressions.
+    
+    \item \textbf{Trust but verify LLM judges.} Use LLM-as-judge for scaling, but audit 5--10\% of decision manually to ensure alignment.
+\end{enumerate}
+
+\subsection{Threshold Calibration}
+\label{sec:thresholds}
+
+The MVES framework provides concrete thresholds (e.g., Recall@5 $\geq$ 0.8). However, these are heuristics derived from general-purpose RAG.
+
+\paragraph{Do not treat these numbers as universal laws.} High-risk domains (e.g., medical advice) require higher recall targets (0.95+). Constrained environments (e.g., mobile devices) may accept lower targets for latency benefits. Calibrate your thresholds by benchmarking current system performance and analyzing the downstream impact of failures (e.g., does a missed valid document cause a hallucination?). Organizations may exceed these minimums for high-stakes applications.

@@ -1,0 +1,65 @@
+\appendix
+\section{Appendix}
+\label{sec:appendix}
+
+\subsection{Full Compatibility Checklist}
+\label{app:checklists}
+
+\begin{itemize}
+    \item \textbf{Data Privacy}: Ensure PII is stripped from logs before sending to cloud judges.
+    \item \textbf{Token Limits}: Check that RAG prompts + retrieved context fit within the model's effective context window (often shorter than the theoretical max).
+    \item \textbf{Rate Limiting}: Implement exponential backoff for API calls to avoid 429 errors during batched evaluation.
+    \item \textbf{Versioning}: Hash prompt sets and data splits (e.g., \texttt{v1.0-sha256}) to ensure regression tests are comparing apples to apples.
+    \item \textbf{Fallbacks}: Ensure the system fails gracefully (e.g., returns a default error message) if the LLM times out or returns malformed JSON.
+\end{itemize}
+
+\subsection{Human Evaluation Rubrics}
+\label{app:rubrics}
+
+\paragraph{Helpfulness (1-5 Likert)}
+\begin{itemize}
+    \item \textbf{1 (Not Helpful)}: Irrelevant, refuses answer incorrectly, or hallmarks hallucinations.
+    \item \textbf{3 (Somewhat Helpful)}: Addresses part of the query but misses nuance or follows wrong format.
+    \item \textbf{5 (Very Helpful)}: Directly answers user intent, follows all formatting constraints, and is concise.
+\end{itemize}
+
+\paragraph{Harmlessness (Binary)}
+\begin{itemize}
+    \item \textbf{Safe}: No hate speech, PII leakage, or dangerous instructions.
+    \item \textbf{Unsafe}: Contains any prohibited content.
+\end{itemize}
+
+\subsection{Extended Monitoring Metrics}
+\label{sec:monitoring_appendix}
+
+\begin{itemize}
+    \item \textbf{Token Usage}: Input/output token counts per request to track cost spikes.
+    \item \textbf{Cache Hit Rate}: Percentage of similar queries served from semantic cache.
+    \item \textbf{Throttling}: Frequency of hitting provider rate limits.
+    \item \textbf{User Feedback}: Ratio of thumbs-up/down per model version.
+    \item \textbf{Escalation Rate}: Percentage of sessions where user requests a human agent.
+\end{itemize}
+
+\subsection{RAG Evaluation Checklist}
+\label{app:rag_checklist}
+\begin{enumerate}
+    \item Separate retrieval and generation evaluation.
+    \item Measure retrieval Recall@k and Precision@k.
+    \item Evaluate faithfulness to retrieved documents.
+    \item Check for correct but unsupported'' responses.
+    \item Verify citation accuracy and coverage.
+    \item Test out-of-scope queries (information not in knowledge base).
+    \item Monitor retrieval latency and index freshness.
+\end{enumerate}
+
+\subsection{LLM-as-Judge Checklist}
+\label{app:judge_checklist}
+\begin{enumerate}
+    \item Use a different model than the one being evaluated.
+    \item Provide explicit rubrics in the evaluation prompt.
+    \item Request chain-of-thought reasoning before scores.
+    \item Randomize presentation order for comparisons.
+    \item Validate scores against human judgments on a sample.
+    \item Use multiple judge models where feasible.
+    \item Document known biases in your report.
+\end{enumerate}

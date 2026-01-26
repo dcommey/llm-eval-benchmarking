@@ -1,0 +1,178 @@
+{
+  "dataset": "extraction",
+  "model": "llama3:8b-instruct-q4_K_M",
+  "n_runs": 1,
+  "timestamp": "2026-01-26T10:46:16.583466",
+  "all_results": [
+    {
+      "case_id": "ex-001",
+      "task_type": "extraction",
+      "condition": "A",
+      "run_number": 1,
+      "model": "llama3:8b-instruct-q4_K_M",
+      "success": true,
+      "latency_ms": 30218.937542056665,
+      "checks_passed": 2,
+      "checks_total": 2,
+      "check_details": [
+        {
+          "check": "json_valid",
+          "passed": true,
+          "message": "Valid JSON"
+        },
+        {
+          "check": "required_keys",
+          "passed": true,
+          "missing": []
+        }
+      ],
+      "response_text": "Here is the extracted contact information in valid JSON format:\n\n```\n{\n    \"name\": \"Maya Chen\",\n    \"email\": \"maya.chen@northwind.com\",\n    \"phone\": \"+14155550199\",\n    \"company\": \"Northwind\"\n}\n```"
+    },
+    {
+      "case_id": "ex-001",
+      "task_type": "extraction",
+      "condition": "B",
+      "run_number": 1,
+      "model": "llama3:8b-instruct-q4_K_M",
+      "success": true,
+      "latency_ms": 3299.2668750230223,
+      "checks_passed": 2,
+      "checks_total": 2,
+      "check_details": [
+        {
+          "check": "json_valid",
+          "passed": true,
+          "message": "Valid JSON"
+        },
+        {
+          "check": "required_keys",
+          "passed": true,
+          "missing": []
+        }
+      ],
+      "response_text": "Here is the extracted contact information in valid JSON format:\n\n```\n{\n    \"name\": \"Maya Chen\",\n    \"email\": \"maya.chen@northwind.com\",\n    \"phone\": \"+14155550199\",\n    \"company\": \"Northwind\"\n}\n```"
+    },
+    {
+      "case_id": "ex-001",
+      "task_type": "extraction",
+      "condition": "C",
+      "run_number": 1,
+      "model": "llama3:8b-instruct-q4_K_M",
+      "success": true,
+      "latency_ms": 3646.4229590492323,
+      "checks_passed": 2,
+      "checks_total": 2,
+      "check_details": [
+        {
+          "check": "json_valid",
+          "passed": true,
+          "message": "Valid JSON"
+        },
+        {
+          "check": "required_keys",
+          "passed": true,
+          "missing": []
+        }
+      ],
+      "response_text": "Here is the extracted contact information in valid JSON format:\n\n```\n{\n    \"name\": \"Maya Chen\",\n    \"email\": \"maya.chen@northwind.com\",\n    \"phone\": \"+1 (415) 555-0199\",\n    \"company\": \"Northwind\"\n}\n```"
+    },
+    {
+      "case_id": "ex-001",
+      "task_type": "extraction",
+      "condition": "D",
+      "run_number": 1,
+      "model": "llama3:8b-instruct-q4_K_M",
+      "success": true,
+      "latency_ms": 3027.933583012782,
+      "checks_passed": 2,
+      "checks_total": 2,
+      "check_details": [
+        {
+          "check": "json_valid",
+          "passed": true,
+          "message": "Valid JSON"
+        },
+        {
+          "check": "required_keys",
+          "passed": true,
+          "missing": []
+        }
+      ],
+      "response_text": "{\n\"name\": \"Maya Chen\",\n\"email\": \"maya.chen@northwind.com\",\n\"phone\": \"+1 (415) 555-0199\",\n\"company\": \"Northwind\"\n}"
+    }
+  ],
+  "dataset_aggregates": {
+    "A": {
+      "mean_pass_rate": 1.0,
+      "deterministic_pct": 100.0,
+      "case_aggregates": [
+        {
+          "case_id": "ex-001",
+          "condition": "A",
+          "n_runs": 1,
+          "all_pass_count": 1,
+          "all_pass_rate": 1.0,
+          "ci_95_lower": 0.20654931437723745,
+          "ci_95_upper": 1,
+          "mean_latency_ms": 30218.937542056665,
+          "std_latency_ms": 0.0,
+          "deterministic": true
+        }
+      ]
+    },
+    "B": {
+      "mean_pass_rate": 1.0,
+      "deterministic_pct": 100.0,
+      "case_aggregates": [
+        {
+          "case_id": "ex-001",
+          "condition": "B",
+          "n_runs": 1,
+          "all_pass_count": 1,
+          "all_pass_rate": 1.0,
+          "ci_95_lower": 0.20654931437723745,
+          "ci_95_upper": 1,
+          "mean_latency_ms": 3299.2668750230223,
+          "std_latency_ms": 0.0,
+          "deterministic": true
+        }
+      ]
+    },
+    "C": {
+      "mean_pass_rate": 1.0,
+      "deterministic_pct": 100.0,
+      "case_aggregates": [
+        {
+          "case_id": "ex-001",
+          "condition": "C",
+          "n_runs": 1,
+          "all_pass_count": 1,
+          "all_pass_rate": 1.0,
+          "ci_95_lower": 0.20654931437723745,
+          "ci_95_upper": 1,
+          "mean_latency_ms": 3646.4229590492323,
+          "std_latency_ms": 0.0,
+          "deterministic": true
+        }
+      ]
+    },
+    "D": {
+      "mean_pass_rate": 1.0,
+      "deterministic_pct": 100.0,
+      "case_aggregates": [
+        {
+          "case_id": "ex-001",
+          "condition": "D",
+          "n_runs": 1,
+          "all_pass_count": 1,
+          "all_pass_rate": 1.0,
+          "ci_95_lower": 0.20654931437723745,
+          "ci_95_upper": 1,
+          "mean_latency_ms": 3027.933583012782,
+          "std_latency_ms": 0.0,
+          "deterministic": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,192 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Evaluating LLM Applications: Benchmarks, Metrics, Test Sets, and Monitoring Pipelines
+%% A Survey/Tutorial Paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,a4paper]{article}
+
+%% ============================================================================
+%% Packages
+%% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{cleveref}  % Must be loaded after amsmath and hyperref
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds}
+\usepackage{tcolorbox}
+\usepackage{listings}
+
+%% Bibliography with natbib
+\usepackage[numbers,sort&compress]{natbib}
+\bibliographystyle{plainnat}
+
+%% ============================================================================
+%% Custom Commands and Environments
+%% ============================================================================
+
+% Key takeaways box
+\newtcolorbox{keytakeaways}{
+  colback=blue!5!white,
+  colframe=blue!75!black,
+  title=Key Takeaways,
+  fonttitle=\bfseries
+}
+
+% Definition box
+\newtcolorbox{definition}[1][]{
+  colback=gray!5!white,
+  colframe=gray!75!black,
+  title=#1,
+  fonttitle=\bfseries
+}
+
+% Warning box
+\newtcolorbox{warningbox}{
+  colback=orange!5!white,
+  colframe=orange!75!black,
+  title=Warning,
+  fonttitle=\bfseries
+}
+
+% Prompt box (for showing example prompts)
+\newtcolorbox{promptbox}[1][Prompt]{
+  colback=green!5!white,
+  colframe=green!60!black,
+  title=#1,
+  fonttitle=\bfseries\ttfamily,
+  left=2mm, right=2mm
+}
+
+% Response box (for showing LLM responses)
+\newtcolorbox{responsebox}[1][Response]{
+  colback=blue!5!white,
+  colframe=blue!60!black,
+  title=#1,
+  fonttitle=\bfseries\ttfamily,
+  left=2mm, right=2mm
+}
+
+% Bad example box
+\newtcolorbox{badexample}[1][Bad Example]{
+  colback=red!5!white,
+  colframe=red!60!black,
+  title={\textcolor{red!70!black}{$\times$} #1},
+  fonttitle=\bfseries,
+  left=2mm, right=2mm
+}
+
+% Good example box
+\newtcolorbox{goodexample}[1][Good Example]{
+  colback=green!5!white,
+  colframe=green!60!black,
+  title={\textcolor{green!70!black}{$\checkmark$} #1},
+  fonttitle=\bfseries,
+  left=2mm, right=2mm
+}
+
+% Empirical finding box
+\newtcolorbox{empirical}[1][Empirical Finding]{
+  colback=purple!5!white,
+  colframe=purple!60!black,
+  title=#1,
+  fonttitle=\bfseries\itshape,
+  left=2mm, right=2mm
+}
+
+%% ============================================================================
+%% Hyperref Setup
+%% ============================================================================
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  citecolor=green!50!black,
+  urlcolor=blue!70!black,
+  pdftitle={Evaluating LLM Applications: Benchmarks, Metrics, Test Sets, and Monitoring Pipelines},
+  pdfauthor={},
+  pdfsubject={LLM Evaluation},
+  pdfkeywords={large language models, evaluation, benchmarks, metrics, RAG, LLM-as-judge}
+}
+
+%% ============================================================================
+%% Document Metadata
+%% ============================================================================
+\title{%
+  \textbf{When ``Better'' Prompts Hurt:}\\[0.5em]
+  \Large Evaluation-Driven Iteration for LLM Applications\\[1em]
+  \large A Framework with Reproducible Local Experiments
+}
+
+\author{%
+  Daniel Commey
+}
+
+\date{January 2026}
+
+%% ============================================================================
+%% Document
+%% ============================================================================
+\begin{document}
+
+\maketitle
+
+%% Abstract
+\input{sections/00_abstract}
+
+\tableofcontents
+\newpage
+
+%% Main Sections
+\input{sections/01_introduction}
+\input{sections/02_evaluation_loop}
+
+%% Pipeline Overview Figure
+\input{figures/pipeline_overview}
+
+\input{sections/02_quality_taxonomy}
+\input{sections/03_eval_methods}
+\input{sections/04_testset_design}
+\input{sections/05_metrics_scoring}
+\input{sections/06_rag_evaluation}
+\input{sections/07_llm_judges}
+\input{sections/08_case_studies}
+\input{sections/09_failure_modes}
+\input{sections/10_best_practices_checklist}
+\input{sections/14_experiments}
+\input{sections/11_future_directions}
+\input{sections/12_limitations}
+\input{sections/13_conclusion}
+
+%% ============================================================================
+%% Acknowledgments
+%% ============================================================================
+\section*{Acknowledgments}
+\addcontentsline{toc}{section}{Acknowledgments}
+
+We thank the broader research community for developing the foundational methods and benchmarks discussed in this survey.
+
+\paragraph{AI Assistance Disclosure.}
+This paper was developed with AI assistance for drafting and organizing content. The human author directed the outline, verified factual claims, curated references, and edited the final text. All citations were verified to correspond to real, published works.
+
+%% ============================================================================
+%% Bibliography
+%% ============================================================================
+\newpage
+\bibliography{bib/references}
+
+%% ============================================================================
+%% Appendices
+%% ============================================================================
+\newpage
+\input{sections/16_appendix}
+
+\end{document}

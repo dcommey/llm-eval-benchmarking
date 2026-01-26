@@ -1,0 +1,101 @@
+%% 04_testset_design.tex - Test Set Design
+
+\section{Test Set Design}
+\label{sec:testset-design}
+
+The quality of an evaluation depends heavily on the test set. This section provides guidance on constructing test sets that meaningfully assess LLM application quality. Table~\ref{tab:dataset-summary} summarizes the test suites used in our experiments.
+
+\begin{table}[h]
+\centering
+\caption{Test suite summary: what each dataset evaluates.}
+\label{tab:dataset-summary}
+\begin{tabular}{@{}lp{4cm}p{4cm}@{}}
+\toprule
+\textbf{Dataset} & \textbf{What It Tests} & \textbf{Failure Caught} \\
+\midrule
+Extraction (20) & JSON schema + required keys & Format drift, markdown wrappers \\
+RAG (15) & Grounding + citation compliance & Unsupported claims, missing citations \\
+Instruction (15) & Format constraints + refusals & Wrong counts, noncompliance \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Representativeness}
+
+A test set should mirror the distribution of inputs the system will encounter in production. Achieving representativeness requires deliberate sampling strategies. Production sampling collects anonymized queries from actual users when available, providing direct evidence of real usage patterns. Task decomposition enumerates the categories of requests the system should handle and samples from each category. Stakeholder input from subject-matter experts can identify common and critical use cases that might not appear in logs.
+
+Stratification ensures test cases cover different input types and lengths, various user intents, multiple difficulty levels, and all supported languages or domains. Without stratification, test sets may over-represent easy cases or common queries while under-representing the long tail of inputs that often cause production failures.
+
+\subsection{Edge Cases and Adversarial Prompts}
+
+Beyond typical inputs, test sets should include challenging cases that stress the system. Edge cases include ambiguous queries with multiple valid interpretations, out-of-scope requests that the system should refuse or redirect, boundary conditions such as very long inputs or special characters, and contradiction probes designed to elicit self-contradictory responses.
+
+Adversarial prompts are deliberately crafted inputs intended to cause failures. These include prompt injection attempts that try to override system instructions, jailbreaking prompts that attempt to bypass safety guardrails, inputs designed to trigger hallucination, and format-breaking inputs that attempt to corrupt structured outputs. Red-teaming efforts~\citep{perez2022red, ganguli2022red} have codified methodologies for systematic adversarial testing.
+
+\subsection{Systematic Coverage Design}
+
+Achieving comprehensive coverage requires systematic strategies beyond random sampling.
+
+\paragraph{Intent Stratification.} Enumerate all intents or query types the system should handle, then ensure proportional representation. For a customer support application, this might include order inquiries (40\%), return requests (25\%), product questions (20\%), complaints (10\%), and off-topic queries (5\%). Document the target distribution and measure actual coverage.
+
+\paragraph{Difficulty Stratification.} Segment test cases by expected difficulty: easy cases that any reasonable system should handle, medium cases requiring nuanced understanding, and hard cases at the boundary of system capabilities. A common distribution targets 50\% easy, 30\% medium, and 20\% hard cases.
+
+\paragraph{Hard Negative Mining.} Hard negatives are inputs that are similar to positive cases but should produce different outputs. For a RAG system, this includes queries that nearly match a knowledge base entry but require a different answer. Hard negatives reveal overfitting to surface patterns.\begin{lstlisting}[basicstyle=\small\ttfamily,language=Python]
+# Example: Mining hard negatives for a product FAQ
+positive = "How do I return a damaged item?"  # -> Return policy
+hard_neg = "How do I return an item I changed my mind about?"  
+# -> Different policy, tests nuanced understanding
+\end{lstlisting}
+
+\paragraph{Failure-Driven Augmentation.} When production failures occur, systematically add similar cases to the test set. This creates a living test suite that captures the failure modes discovered over time. Track the provenance of each test case (synthetic, production sample, or failure-derived).
+
+\subsection{Tutorial: The Extraction Evaluation Loop}
+
+To illustrate the cycle for structured data tasks:
+
+\begin{enumerate}
+    \item \textbf{Goal}: Extract valid JSON objects for API consumption.
+    \item \textbf{Test}: Run a golden set of 20 invoices with varied formats.
+    \item \textbf{Failure}: A generic helpful prompt (``Extract the information'') produces:
+    \begin{badexample}
+    Sure, here is the data:\\
+    ```json\\
+    \{ "total": "\$500" \}\\
+    ```\\
+    (Fails validation due to markdown blocks and conversational filler)
+    \end{badexample}
+    \item \textbf{Fix}: Switch to a task-specific constraint prompt: ``Output VALID JSON ONLY. Do not include markdown formatting or conversational text.''
+    \item \textbf{Re-test}: The targeted prompt yields clean, parseable JSON:
+    \begin{goodexample}
+    \{ "total": 500.00 \}
+    \end{goodexample}
+\end{enumerate}
+
+This highlights the finding from Section~\ref{sec:experiments} that task-specific constraints often outperform generic helpfulness.
+
+\subsection{Multi-Turn Conversation Tests}
+
+Many LLM applications involve multi-turn dialogue. Evaluation must assess behavior across conversation trajectories, not just single-turn performance. Key considerations include context retention (whether the model correctly references earlier turns), consistency (whether the model contradicts itself across turns), clarification handling (whether the model responds appropriately to follow-up questions), and topic switching (how the model handles abrupt topic changes).
+
+Multi-turn test cases should specify the full conversation history, expected behaviors at each turn, and evaluation criteria. This format is more complex to author than single-turn cases but essential for applications where conversation quality matters.
+
+\subsection{Data Contamination Considerations}
+
+Modern LLMs are trained on massive web corpora that may include common benchmarks. If evaluation test cases appear in training data, performance estimates are inflated and unreliable.
+
+\begin{warningbox}
+Data contamination is a growing concern as training corpora expand. Never assume that a public benchmark provides uncontaminated evaluation.
+\end{warningbox}
+
+Mitigation strategies include creating proprietary test sets using internal data not available on the web, date filtering to use content created after the model's training cutoff, perturbation testing to paraphrase test cases and verify consistent performance, and contamination detection to test whether the model can recite test cases verbatim~\citep{sainz2023nlp, jacovi2023stop}.
+
+\subsection{Test Set Size and Statistical Power}
+
+Determining the appropriate number of test cases requires considering several factors. Effect size matters: smaller expected differences require more samples to detect reliably. Variance matters: higher output variance requires more samples to achieve stable estimates. Strata matter: each category in a stratified test set needs sufficient representation to draw conclusions.
+
+A rough guideline suggests that detecting a 5\% absolute difference in pass rate with 95\% confidence and 80\% power requires approximately 400 to 600 test cases per condition. Smaller test sets may suffice for detecting larger differences or for preliminary evaluation during development. Confidence intervals should always be reported alongside point estimates to communicate the uncertainty in measurements.
+
+\subsection{Test Set Maintenance}
+
+Test sets require ongoing maintenance to remain useful. Version control should track all changes to test cases, enabling reproducibility and debugging when metrics change unexpectedly. Periodic refresh adds new cases as the application evolves and usage patterns shift. Decontamination rotates out cases that may have become contaminated through inclusion in model training data. Gold answer review periodically verifies that reference answers remain accurate, especially for time-sensitive information.
+

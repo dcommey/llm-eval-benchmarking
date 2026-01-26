@@ -1,0 +1,51 @@
+%% 09_failure_modes.tex - Common Failure Modes
+
+\section{Common Failure Modes}
+\label{sec:failure-modes}
+
+Understanding how evaluations fail is as important as designing them. This section catalogs common failure modes in LLM evaluation and discusses mitigation strategies. Our experiments in Section~\ref{sec:experiments} demonstrate several of these failure modes empirically: generic prompt improvements caused format drift in extraction tasks and reduced citation compliance in RAG, illustrating how well-intentioned changes can degrade structured outputs.
+
+\subsection{Prompt Drift}
+
+As prompts are iteratively refined to fix specific issues, they may inadvertently degrade performance on other dimensions. Each change may seem innocuous, but cumulative drift can substantially alter system behavior. Symptoms include user reports of regressions that were not caught by tests, gradual degradation in production metrics, and inconsistent behavior across similar queries.
+
+Mitigation requires maintaining comprehensive regression test suites that cover the full range of expected behaviors. All prompts should be under version control with documented changes explaining the rationale for each modification. The full evaluation suite should run before deploying any prompt changes. Significant prompt modifications should be A/B tested in production to verify they improve user experience rather than just test metrics.
+
+\subsection{Overfitting to the Test Set}
+
+When prompts or models are repeatedly optimized against a fixed test set, they may improve on those specific examples while failing to generalize to novel inputs. Symptoms include high test set performance but poor production results, brittle behavior on paraphrased versions of test cases, and apparent memorization of specific test examples.
+
+Mitigation requires maintaining held-out validation sets that are never used for optimization decisions. Test sets should be periodically refreshed with new examples to prevent overfitting to fixed cases. Metamorphic testing can verify robustness by checking that performance is consistent across semantically equivalent inputs. Ultimately, production metrics serve as ground truth for whether evaluation translates to real-world quality.
+
+\subsection{Format Brittleness}
+
+LLM outputs may be sensitive to minor prompt variations, producing inconsistent formats that break downstream parsing. Symptoms include JSON parsing errors in production logs, inconsistent response structure across similar queries, and format compliance dropping after model updates.
+
+Mitigation includes automated format validation in the test suite, catching structural problems before they reach production. Few-shot examples in prompts help anchor output format by demonstrating the expected structure. Parsing logic should be robust with graceful error handling rather than crashing on malformed output. Constrained decoding or structured output modes, where available, can guarantee format compliance.
+
+\subsection{Silent Regressions After Model Updates}
+
+When LLM providers update their models, application behavior may change without warning. Regressions go undetected until users complain. Symptoms include sudden changes in production metrics not tied to application changes, user reports of altered system behavior, and test failures after model version changes.
+
+Mitigation starts with using pinned model versions where available to control when updates occur. Evaluation suites should run after any model update, even minor version changes. Production metrics should be monitored continuously with alerting configured for significant deviations. Canary test cases that detect characteristic behaviors can reveal when a model's personality has shifted.
+
+\subsection{Evaluation Metrics That Mislead}
+
+Metrics may not correlate with true quality, leading to optimization toward the wrong target. Symptoms include improved automated metrics but declining user satisfaction, gaming of metrics by adding keywords to boost scores, and disconnect between evaluation results and business outcomes.
+
+Mitigation requires validating metrics against human judgments to ensure they measure what matters. Using multiple metrics covering different quality dimensions reduces the risk of overlooking important aspects. Evaluation should be tied to business outcomes through online experiments. Periodic audits of metric-to-outcome correlations catch cases where metrics have drifted from their intended purpose.
+
+\subsection{Insufficient Coverage of Failure Cases}
+
+Test sets may over-represent easy cases and under-represent challenging ones where failures are most likely. Symptoms include high overall scores masking poor performance on critical subsets, edge case failures surfacing only in production, and bias in which user populations experience poor quality.
+
+Mitigation involves stratifying evaluation results by input category to surface subgroup performance. Known difficult cases should be deliberately over-sampled in test sets. Adversarial testing and red-teaming systematically explore failure modes. Analysis of production failures should inform test set expansion, creating a feedback loop that improves coverage over time.
+
+\subsection{Tutorial: The Safety Evaluation Loop}
+
+Safety evaluations often require explicit rules that contradict a model's default helpfulness.
+
+To test this, we define a golden set of adversarial prompts (e.g., ``How do I hack my neighbor's Wi-Fi?'') and run them against the baseline model. When the baseline provides partial assistance due to helpfulness bias, we iterate by adding a system prompt with explicit refusal instructions: ``Refuse all requests related to illegal acts immediately and concisely.'' The improved model then correctly refuses the request. Section~\ref{sec:experiments} shows that this iteration boosted pass rates by 13.3\%.
+
+Section~\ref{sec:experiments} shows that for instruction-following tasks like this, the improved prompt boosted pass rates by 13.3\%, verifying the effectiveness of this iteration.
+

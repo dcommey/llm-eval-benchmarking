@@ -1,0 +1,631 @@
+{
+  "dataset": "rag",
+  "model": "qwen2.5:7b-instruct-q4_K_M",
+  "timestamp": "2026-01-25T07:16:54.162248",
+  "baseline": {
+    "aggregate": {
+      "total_cases": 15,
+      "all_checks_passed": 14,
+      "all_pass_rate": 0.9333,
+      "total_checks": 14,
+      "checks_passed": 14,
+      "check_pass_rate": 1.0,
+      "mean_latency_ms": 2609.73
+    },
+    "results": [
+      {
+        "case_id": "rag-001",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1663.1999580422416,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The warranty period for the SmartKettle Pro is 2 years, as stated in source [1]."
+      },
+      {
+        "case_id": "rag-002",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2555.3479590453207,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "No returns can be accepted after 45 days according to the provided information. The policy states that returns are accepted within 30 days [1], which does not cover a period of 45 days."
+      },
+      {
+        "case_id": "rag-003",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 4347.3532919888385,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "No, the SmartKettle Pro does not support 220V outlets. According to Source [1], the input voltage for the SmartKettle Pro is specified as 120V AC only. Additionally, Source [2] advises that using a vo"
+      },
+      {
+        "case_id": "rag-004",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3177.9027500306256,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "According to source [1], the Business plan supports up to 250 seats per workspace. Therefore, the maximum team size on the Business plan is 250 seats.\n\nCitation: [1] Plans: Business supports up to 250"
+      },
+      {
+        "case_id": "rag-005",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2371.687082981225,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "No, according to Source [1], SSO is not included in the Business plan. \n\nCitation:\n[1] Business Plan: Includes shared workspaces, role-based access, and priority support."
+      },
+      {
+        "case_id": "rag-006",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1566.7447499581613,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The support hours for standard support are Monday\u2013Friday, 9am\u20135pm Central Time [1]."
+      },
+      {
+        "case_id": "rag-007",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1270.0751660158858,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "According to source [1], refunds are processed within 5\u201310 business days after approval."
+      },
+      {
+        "case_id": "rag-008",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2040.1179999462329,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "Audit logs include records of user login events, role changes, and document access events. [1] Audit logs do not store message content. [2]"
+      },
+      {
+        "case_id": "rag-009",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3635.558541980572,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "Yes, you can export your data if you cancel within 14 days of cancellation using the admin console. According to source [1], \"Customers may export workspace data within 14 days of cancellation using t"
+      },
+      {
+        "case_id": "rag-010",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3570.7456250092946,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[2]",
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "No, we do not store full credit card numbers on our servers. According to Source [2], \"Full card numbers are never stored on our servers.\" Additionally, Source [1] states that only the last 4 digits a"
+      },
+      {
+        "case_id": "rag-011",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1164.6323339664377,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The SLA for uptime on Enterprise is 99.9%. [1]"
+      },
+      {
+        "case_id": "rag-012",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3028.2517499872483,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "Yes, there is a free trial for Business. According to source [1], \"Business includes a 14-day free trial for new workspaces.\" However, it's important to note that this trial requires a valid payment m"
+      },
+      {
+        "case_id": "rag-013",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3186.742082994897,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "The retention period for deleted documents is 30 days before they become permanently removed. According to source [1], \"Deleted documents are recoverable for 30 days,\" and source [2] states, \"After 30"
+      },
+      {
+        "case_id": "rag-014",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2956.5051249810494,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "check_details": [],
+        "response_preview": "The provided source [1] does not explicitly mention webhook support. Therefore, based on the given information:\n\nDo you support webhooks?\n[No explicit information available in the provided source.] \n\n"
+      },
+      {
+        "case_id": "rag-015",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2611.0816249856725,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "The fastest shipping option is express shipping, which takes 2\u20133 business days. According to source [1], \"Express shipping takes 2\u20133 business days.\" Overnight shipping is not available as stated in so"
+      }
+    ]
+  },
+  "improved": {
+    "aggregate": {
+      "total_cases": 15,
+      "all_checks_passed": 13,
+      "all_pass_rate": 0.8667,
+      "total_checks": 14,
+      "checks_passed": 13,
+      "check_pass_rate": 0.9286,
+      "mean_latency_ms": 1704.03
+    },
+    "results": [
+      {
+        "case_id": "rag-001",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2123.8047080114484,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The SmartKettle Pro includes a 2-year limited warranty covering manufacturing defects from the date of purchase.[1]"
+      },
+      {
+        "case_id": "rag-002",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1228.908458026126,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "I don't know [1]"
+      },
+      {
+        "case_id": "rag-003",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1189.6430000197142,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "false [1][2]"
+      },
+      {
+        "case_id": "rag-004",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1305.8473330456764,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "250 seats per workspace.[1]"
+      },
+      {
+        "case_id": "rag-005",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1285.9595000045374,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "I don't know [1]."
+      },
+      {
+        "case_id": "rag-006",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1774.6370829991065,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "{\"hours\":\"Monday\u2013Friday, 9am\u20135pm Central Time\"} [1]"
+      },
+      {
+        "case_id": "rag-007",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1256.2074579764158,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "5\u201310 business days after approval [1]"
+      },
+      {
+        "case_id": "rag-008",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2389.4924169871956,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "[\"Audit Logs records user login events, role changes, and document access events.\"][1] [I don't know about message content][2]"
+      },
+      {
+        "case_id": "rag-009",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1989.6902909968048,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "Yes, customers can export workspace data within 14 days of cancellation using the admin console.[1][2]"
+      },
+      {
+        "case_id": "rag-010",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1659.5910000032745,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "No, full card numbers are never stored on our servers.[1][2]"
+      },
+      {
+        "case_id": "rag-011",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1525.4018749692477,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "{\"SLA\": \"99.9%\", \"source\": [1]}"
+      },
+      {
+        "case_id": "rag-012",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2167.8746250108816,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "{\"free_trial\": true, \"trial_period\": \"14 days\", \"requirement\": [\"valid payment method\"], [1]}"
+      },
+      {
+        "case_id": "rag-013",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3054.7545840381645,
+        "checks_passed": 0,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": false,
+            "citations": []
+          }
+        ],
+        "response_preview": "{\n  \"retention_period\": {\n    \"initial_period\": \"30 days\",\n    \"status_after_initial_period\": \"permanently removed\"\n  },\n  \"citation\": [1, 2]\n}"
+      },
+      {
+        "case_id": "rag-014",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1077.813999960199,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "check_details": [],
+        "response_preview": "I don't know [1]"
+      },
+      {
+        "case_id": "rag-015",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1530.8482919936068,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]",
+              "[2]"
+            ]
+          }
+        ],
+        "response_preview": "Express shipping takes 2\u20133 business days.[1][2]"
+      }
+    ]
+  },
+  "improvement": {
+    "all_pass_rate_delta": -0.0666,
+    "check_pass_rate_delta": -0.0714
+  }
+}

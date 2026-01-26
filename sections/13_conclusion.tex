@@ -1,0 +1,8 @@
+%% 13_conclusion.tex - Conclusion
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+LLM applications require evaluation-driven iteration, not intuition-based prompt engineering. This paper provides a framework and reproducible harness demonstrating that generic prompt improvements are not monotonic---adding ``helpful assistant'' wrappers with explicit rules degraded extraction by 10\% and RAG compliance by 13\% while improving instruction-following by 13\%. A four-condition ablation isolated the mechanism: the system wrapper itself is benign; the degradation comes from generic rules conflicting with task-specific constraints.
+
+The practical implication is that every prompt change should be validated against task-specific test suites before deployment. The evaluation harness, datasets, and experimental results in this paper provide a starting point for teams to build their own evaluation practices.

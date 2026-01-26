@@ -1,0 +1,38 @@
+%% 12_limitations.tex - Limitations
+
+\section{Limitations}
+\label{sec:limitations}
+
+This survey provides practical guidance for LLM evaluation, but it does not solve all challenges. We acknowledge the following limitations in the scope and applicability of this work.
+
+\subsection{What This Guide Does Not Cover}
+
+This survey focuses on application-level evaluation and does not address several important related topics. Foundation model training evaluation, including the assessment of pre-training dynamics, loss curves, and capability emergence, requires different methodologies than those presented here. Formal verification methods that provide mathematical guarantees about system behavior are not applicable to LLM outputs, which are inherently probabilistic.
+
+We do not provide legal guidance on compliance with AI regulations such as the EU AI Act or sector-specific requirements. Organizations should consult legal experts for regulatory matters. Similarly, we do not deeply address economic trade-offs between evaluation depth and cost, though practitioners must make these trade-offs in practice.
+
+The tooling landscape for LLM evaluation changes rapidly. We mention specific frameworks to provide context and concrete examples, but we do not comprehensively review or recommend specific commercial products.
+
+\subsection{Fundamental Challenges That Remain Open}
+
+Several fundamental challenges in LLM evaluation remain unresolved and may not have complete solutions. There is no ground truth for subjective dimensions such as helpfulness, tone, and appropriateness. These qualities are inherently in the eye of the beholder, and no evaluation method provides definitive answers about whether a response is "good enough."
+
+Distribution shift remains a persistent challenge. Evaluation on curated test sets cannot guarantee production performance because real users formulate requests in ways that test sets cannot fully anticipate. The gap between offline and online quality is unavoidable.
+
+The adversarial arms race continues to evolve. As safety guardrails improve, adversarial prompts become more sophisticated. Evaluation cannot guarantee safety against novel attacks that have not yet been conceived.
+
+Model inscrutability limits diagnostic capability. We evaluate LLMs effectively as black boxes, and understanding \emph{why} a model fails on specific inputs remains difficult. This limits our ability to predict and prevent failures proactively.
+
+Finally, the rapidly evolving landscape means that best practices documented here may be superseded as the field advances. Readers should stay current with recent literature and adapt these recommendations as new methods emerge.
+
+\subsection{Limitations of Specific Methods}
+
+Each evaluation method described in this survey has inherent limitations. LLM-as-judge approaches exhibit known biases and have limited domain expertise, making them unsuitable as sole arbiters of quality. Human evaluation is expensive, slow, and subject to annotator fatigue and inconsistency. Automated metrics may not correlate with true quality and can be gamed through optimization that exploits metric weaknesses. Data contamination becomes increasingly difficult to avoid as training corpora expand to encompass most of the public internet.
+
+\subsection{Scope of Applicability}
+
+This survey is most applicable to text-in, text-out LLM applications that operate as single-model systems rather than complex multi-agent orchestrations. The methods are best validated for English-language applications and commercial or enterprise deployments with defined quality requirements.
+
+Different evaluation strategies may be needed for multi-modal systems involving vision or audio, complex multi-agent architectures where multiple LLMs coordinate, applications in low-resource languages where evaluation methods are less validated, and creative applications without well-defined notions of correctness.
+
+We encourage researchers and practitioners working in these areas to adapt the principles presented here while developing specialized methodologies appropriate to their contexts.

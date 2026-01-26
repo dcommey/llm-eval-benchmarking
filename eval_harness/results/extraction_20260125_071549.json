@@ -1,0 +1,995 @@
+{
+  "dataset": "extraction",
+  "model": "qwen2.5:7b-instruct-q4_K_M",
+  "timestamp": "2026-01-25T07:15:49.448905",
+  "baseline": {
+    "aggregate": {
+      "total_cases": 20,
+      "all_checks_passed": 20,
+      "all_pass_rate": 1.0,
+      "total_checks": 44,
+      "checks_passed": 44,
+      "check_pass_rate": 1.0,
+      "mean_latency_ms": 3417.29
+    },
+    "results": [
+      {
+        "case_id": "ex-001",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 22526.700166985393,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"name\": \"Maya Chen\",\n  \"email\": \"maya.chen@northwind.com\",\n  \"phone\": \"+1 (415) 555-0199\",\n  \"company\": \"Northwind\"\n}\n```"
+      },
+      {
+        "case_id": "ex-002",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2237.3787080287,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"name\": \"Omar\",\n  \"email\": \"omar.k@riverstone.ai\",\n  \"phone\": null,\n  \"company\": null\n}\n```"
+      },
+      {
+        "case_id": "ex-003",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3302.956582978368,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"invoice_id\": \"INV-8831\",\n  \"date\": \"2025-10-14\",\n  \"total_usd\": 1249.50,\n  \"vendor\": \"Acme Supplies\"\n}\n```"
+      },
+      {
+        "case_id": "ex-004",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3228.8581249886192,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"invoice_id\": \"77A-19\",\n  \"date\": \"03/02/2026\",\n  \"total_usd\": 89.00,\n  \"vendor\": \"Blue Harbor LLC\"\n}\n```"
+      },
+      {
+        "case_id": "ex-005",
+        "task_type": "extraction",
+        "category": "calendar",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3557.964667037595,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"title\": \"Dentist appointment\",\n  \"date\": \"2026-02-08\",\n  \"start_time\": \"14:30\",\n  \"end_time\": \"15:15\",\n  \"location\": \"Lakeview Dental\"\n}\n```"
+      },
+      {
+        "case_id": "ex-006",
+        "task_type": "extraction",
+        "category": "calendar",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3487.0534170186147,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"title\": \"Team sync\",\n  \"date\": \"2026-02-07\",\n  \"start_time\": \"09:00\",\n  \"end_time\": \"09:45\",\n  \"location\": \"Conf Room B\"\n}\n```"
+      },
+      {
+        "case_id": "ex-007",
+        "task_type": "extraction",
+        "category": "support_ticket",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2630.217708006967,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"product\": \"mobile app\",\n  \"issue\": \"crashes on login after update 3.2.1\",\n  \"severity\": \"high\",\n  \"customer\": null\n}\n```"
+      },
+      {
+        "case_id": "ex-008",
+        "task_type": "extraction",
+        "category": "support_ticket",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2289.1062909620814,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"product\": \"MegaMart\",\n  \"issue\": \"billing dashboard shows blank charts\",\n  \"severity\": \"medium\",\n  \"customer\": null\n}\n```"
+      },
+      {
+        "case_id": "ex-009",
+        "task_type": "extraction",
+        "category": "classification",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 947.1851669950411,
+        "checks_passed": 4,
+        "checks_total": 4,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          },
+          {
+            "check": "allowed_values.intent",
+            "passed": true,
+            "message": "intent=refund"
+          },
+          {
+            "check": "allowed_values.urgency",
+            "passed": true,
+            "message": "urgency=high"
+          }
+        ],
+        "response_preview": "{\"intent\":\"refund\",\"urgency\":\"high\"}"
+      },
+      {
+        "case_id": "ex-010",
+        "task_type": "extraction",
+        "category": "classification",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 941.8480829917826,
+        "checks_passed": 4,
+        "checks_total": 4,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          },
+          {
+            "check": "allowed_values.intent",
+            "passed": true,
+            "message": "intent=sales"
+          },
+          {
+            "check": "allowed_values.urgency",
+            "passed": true,
+            "message": "urgency=low"
+          }
+        ],
+        "response_preview": "{\"intent\":\"sales\",\"urgency\":\"low\"}"
+      },
+      {
+        "case_id": "ex-011",
+        "task_type": "extraction",
+        "category": "numbers",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1088.99104205193,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\"values\":[12, 7, 0]}\n```"
+      },
+      {
+        "case_id": "ex-012",
+        "task_type": "extraction",
+        "category": "numbers",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2595.9975000005215,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\"values\":[1200000, 950000, 1050000]}\n```\n\nThis JSON contains the extracted numeric values from the text with the specified keys."
+      },
+      {
+        "case_id": "ex-013",
+        "task_type": "extraction",
+        "category": "policy",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1915.085916989483,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"allowed\": [\"public pricing\", \"documentation links\"],\n  \"disallowed\": [\"internal roadmap dates\", \"customer PII\"]\n}\n```"
+      },
+      {
+        "case_id": "ex-014",
+        "task_type": "extraction",
+        "category": "policy",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1845.1162080164067,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"allowed\": [\"shipping times\"],\n  \"disallowed\": [\"passwords\", \"SSNs\", \"credit card numbers\"]\n}\n```"
+      },
+      {
+        "case_id": "ex-015",
+        "task_type": "extraction",
+        "category": "meeting_notes",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 5855.986749986187,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"action_items\": [\n    {\n      \"owner\": \"Alex\",\n      \"task\": \"draft the proposal\",\n      \"due_date\": \"2026-01-25\"\n    },\n    {\n      \"owner\": \"Priya\",\n      \"task\": \"review budget\",\n      "
+      },
+      {
+        "case_id": "ex-016",
+        "task_type": "extraction",
+        "category": "meeting_notes",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3476.818832976278,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"action_items\": [\n    {\n      \"owner\": \"Jess\",\n      \"task\": \"send contract\",\n      \"due_date\": null\n    },\n    {\n      \"owner\": \"Marco\",\n      \"task\": \"update onboarding doc\",\n      \"due_"
+      },
+      {
+        "case_id": "ex-017",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 777.7850829879753,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\"email\": null}\n```"
+      },
+      {
+        "case_id": "ex-018",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 870.0944159645587,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\"email\":\"support@example.com\"}\n```"
+      },
+      {
+        "case_id": "ex-019",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1792.4704999895766,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\"name\":\"Li Wei\",\"email\":\"li.wei@uni.edu\",\"phone\":null,\"company\":\"University Lab\"}\n```"
+      },
+      {
+        "case_id": "ex-020",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2978.2581250183284,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "```json\n{\n  \"invoice_id\": \"A-0001\",\n  \"date\": \"2026-01-01\",\n  \"total_usd\": 0.0,\n  \"vendor\": \"ACME\"\n}\n```"
+      }
+    ]
+  },
+  "improved": {
+    "aggregate": {
+      "total_cases": 20,
+      "all_checks_passed": 20,
+      "all_pass_rate": 1.0,
+      "total_checks": 44,
+      "checks_passed": 44,
+      "check_pass_rate": 1.0,
+      "mean_latency_ms": 2052.42
+    },
+    "results": [
+      {
+        "case_id": "ex-001",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2240.334666974377,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\":\"Maya Chen\",\"email\":\"maya.chen@northwind.com\",\"phone\":null,\"company\":\"Northwind\"}"
+      },
+      {
+        "case_id": "ex-002",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1835.1172500406392,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\":\"Omar\",\"email\":\"omar.k@riverstone.ai\",\"phone\":null,\"company\":null}"
+      },
+      {
+        "case_id": "ex-003",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2779.8763329628855,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"invoice_id\":\"INV-8831\",\"date\":\"2025-10-14\",\"total_usd\":1249.5,\"vendor\":\"Acme Supplies\"}"
+      },
+      {
+        "case_id": "ex-004",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2692.2396660083905,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"invoice_id\":\"77A-19\",\"date\":\"03\\/02\\/2026\",\"total_usd\":89.0,\"vendor\":\"Blue Harbor LLC\"}"
+      },
+      {
+        "case_id": "ex-005",
+        "task_type": "extraction",
+        "category": "calendar",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2823.910708015319,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"title\":\"Dentist appointment\",\"date\":\"2026-02-08\",\"start_time\":\"14:30\",\"end_time\":\"15:15\",\"location\":null}"
+      },
+      {
+        "case_id": "ex-006",
+        "task_type": "extraction",
+        "category": "calendar",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3141.284374985844,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"title\":\"Team sync\",\"date\":\"2026-02-05\",\"start_time\":\"09:00:00\",\"end_time\":\"09:45:00\",\"location\":\"Conf Room B\"}"
+      },
+      {
+        "case_id": "ex-007",
+        "task_type": "extraction",
+        "category": "support_ticket",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2090.7909169909544,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"product\":\"mobile app\",\"issue\":\"crashes on login after update 3.2.1\",\"severity\":\"high\",\"customer\":null}"
+      },
+      {
+        "case_id": "ex-008",
+        "task_type": "extraction",
+        "category": "support_ticket",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1661.382207996212,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"product\":\"Billing Dashboard\",\"issue\":\"Charts are blank\",\"severity\":\"medium\",\"customer\":null}"
+      },
+      {
+        "case_id": "ex-009",
+        "task_type": "extraction",
+        "category": "classification",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1293.8551669940352,
+        "checks_passed": 4,
+        "checks_total": 4,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          },
+          {
+            "check": "allowed_values.intent",
+            "passed": true,
+            "message": "intent=refund"
+          },
+          {
+            "check": "allowed_values.urgency",
+            "passed": true,
+            "message": "urgency=high"
+          }
+        ],
+        "response_preview": "{\"intent\":\"refund\",\"urgency\":\"high\"}"
+      },
+      {
+        "case_id": "ex-010",
+        "task_type": "extraction",
+        "category": "classification",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1329.494874982629,
+        "checks_passed": 4,
+        "checks_total": 4,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          },
+          {
+            "check": "allowed_values.intent",
+            "passed": true,
+            "message": "intent=sales"
+          },
+          {
+            "check": "allowed_values.urgency",
+            "passed": true,
+            "message": "urgency=low"
+          }
+        ],
+        "response_preview": "{\"intent\":\"sales\",\"urgency\":\"low\"}"
+      },
+      {
+        "case_id": "ex-011",
+        "task_type": "extraction",
+        "category": "numbers",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1164.6164580015466,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"values\":[12,7,0]}"
+      },
+      {
+        "case_id": "ex-012",
+        "task_type": "extraction",
+        "category": "numbers",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1926.4170420356095,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"values\":[1200000,950000,1050000]}"
+      },
+      {
+        "case_id": "ex-013",
+        "task_type": "extraction",
+        "category": "policy",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1699.840250017587,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"allowed\":[\"public pricing\",\"documentation links\"],\"disallowed\":[\"internal roadmap dates\",\"customer PII\"]}"
+      },
+      {
+        "case_id": "ex-014",
+        "task_type": "extraction",
+        "category": "policy",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1656.081416993402,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"allowed\":[\"shipping times\"],\"disallowed\":[\"passwords\",\"SSNs\",\"credit card numbers\"]}"
+      },
+      {
+        "case_id": "ex-015",
+        "task_type": "extraction",
+        "category": "meeting_notes",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3614.1816249582916,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"action_items\":[{\"owner\":\"Alex\",\"task\":\"draft the proposal\",\"due_date\":\"2026-01-25\"},{\"owner\":\"Priya\",\"task\":\"review budget\",\"due_date\":null},{\"owner\":\"Sam\",\"task\":\"schedule kickoff\",\"due_date\":null}"
+      },
+      {
+        "case_id": "ex-016",
+        "task_type": "extraction",
+        "category": "meeting_notes",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2401.712167018559,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"action_items\":[{\"owner\":\"Jess\",\"task\":\"send contract\",\"due_date\":null},{\"owner\":\"Marco\",\"task\":\"update onboarding doc\",\"due_date\":null}]}"
+      },
+      {
+        "case_id": "ex-017",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 988.6430420447141,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"email\":null}"
+      },
+      {
+        "case_id": "ex-018",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1061.2122500315309,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"email\":\"support@example.com\"}"
+      },
+      {
+        "case_id": "ex-019",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1976.765958010219,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\":\"Li Wei\",\"email\":\"li.wei@uni.edu\",\"phone\":null,\"company\":\"University Lab\"}"
+      },
+      {
+        "case_id": "ex-020",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2670.640749973245,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"invoice_id\":\"A-0001\",\"date\":\"2026-01-01\",\"total_usd\":0.0,\"vendor\":\"ACME\"}"
+      }
+    ]
+  },
+  "improvement": {
+    "all_pass_rate_delta": 0.0,
+    "check_pass_rate_delta": 0.0
+  }
+}

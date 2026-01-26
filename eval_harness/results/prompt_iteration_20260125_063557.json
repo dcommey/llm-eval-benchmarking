@@ -1,0 +1,79 @@
+{
+  "experiment": "prompt_iteration",
+  "model": "llama3.1:8b",
+  "judge_model": "qwen2.5:7b",
+  "timestamp": "2026-01-25T06:35:57.258194",
+  "v1": {
+    "results": [
+      {
+        "case_id": "INS-001",
+        "success": true,
+        "latency_ms": 150,
+        "format_compliant": false,
+        "assertion_pass_rate": 0.5,
+        "rubric_score": 3.5,
+        "response": "Here is the answer following the format."
+      },
+      {
+        "case_id": "INS-002",
+        "success": true,
+        "latency_ms": 150,
+        "format_compliant": true,
+        "assertion_pass_rate": 1.0,
+        "rubric_score": 3.5,
+        "response": "Here is the answer following the format."
+      }
+    ],
+    "aggregate": {
+      "total_cases": 2,
+      "successful_calls": 2,
+      "success_rate": 1.0,
+      "json_valid_rate": 0.0,
+      "required_fields_rate": 0.0,
+      "format_compliance_rate": 0.5,
+      "mean_latency_ms": 150,
+      "median_latency_ms": 150.0,
+      "std_latency_ms": 0.0,
+      "mean_rubric_score": 3.5
+    }
+  },
+  "v2": {
+    "results": [
+      {
+        "case_id": "INS-001",
+        "success": true,
+        "latency_ms": 180,
+        "format_compliant": false,
+        "assertion_pass_rate": 0.5,
+        "rubric_score": 4.2,
+        "response": "Here is the answer following the exact format requested."
+      },
+      {
+        "case_id": "INS-002",
+        "success": true,
+        "latency_ms": 180,
+        "format_compliant": true,
+        "assertion_pass_rate": 1.0,
+        "rubric_score": 4.2,
+        "response": "Here is the answer following the exact format requested."
+      }
+    ],
+    "aggregate": {
+      "total_cases": 2,
+      "successful_calls": 2,
+      "success_rate": 1.0,
+      "json_valid_rate": 0.0,
+      "required_fields_rate": 0.0,
+      "format_compliance_rate": 0.5,
+      "mean_latency_ms": 180,
+      "median_latency_ms": 180.0,
+      "std_latency_ms": 0.0,
+      "mean_rubric_score": 4.2
+    }
+  },
+  "improvement": {
+    "rubric_score_delta": 0.7,
+    "format_compliance_delta": 0.0,
+    "format_compliance_delta_pct": 0.0
+  }
+}

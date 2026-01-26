@@ -1,0 +1,47 @@
+{
+  "experiment": "position_bias",
+  "judge_model": "qwen2.5:7b",
+  "timestamp": "2026-01-25T06:35:57.258827",
+  "cases": [
+    {
+      "case_id": "PAIR-001",
+      "verdict_ab": {
+        "winner": "A",
+        "success": true
+      },
+      "verdict_ba": {
+        "winner": "B",
+        "success": true
+      },
+      "consistent": false,
+      "first_position_preference_ab": true,
+      "first_position_preference_ba": true,
+      "both_favor_first": true
+    },
+    {
+      "case_id": "PAIR-002",
+      "verdict_ab": {
+        "winner": "A",
+        "success": true
+      },
+      "verdict_ba": {
+        "winner": "B",
+        "success": true
+      },
+      "consistent": false,
+      "first_position_preference_ab": true,
+      "first_position_preference_ba": true,
+      "both_favor_first": true
+    }
+  ],
+  "metrics": {
+    "total_pairs": 2,
+    "flips": 2,
+    "flip_rate": 1.0,
+    "first_position_wins": 2,
+    "second_position_wins": 0,
+    "ties": 0,
+    "position_bias": 1.0,
+    "first_position_preference": 1.0
+  }
+}

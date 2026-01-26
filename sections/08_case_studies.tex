@@ -1,0 +1,46 @@
+%% 08_case_studies.tex - Case Studies
+
+\section{Case Studies}
+\label{sec:case-studies}
+
+This section illustrates how evaluation principles apply to three representative LLM applications. Each case study describes a real-world deployment scenario, the quality dimensions that mattered most, how the evaluation was structured, and lessons learned.
+
+\subsection{Case Study 1: Customer Support Assistant}
+
+A large e-commerce company deployed an LLM-powered chatbot to handle tier-1 customer inquiries, including questions about orders, returns, shipping policies, and product availability. The system needed to resolve common issues without human intervention while correctly escalating complex cases to human agents.
+
+The key quality dimensions for this application were helpfulness (whether the response actually resolved the customer's issue), harmlessness (avoidance of inappropriate content or false promises about policies), format adherence (consistency with brand voice guidelines), and escalation accuracy (correct identification of cases requiring human agents). Early in development, the team discovered that escalation accuracy was particularly critical: incorrect escalations either overwhelmed human agents with trivial requests or left frustrated customers without recourse.
+
+The test set was constructed by sampling from historical support tickets across product categories. The team ensured coverage of edge cases including multi-issue tickets where customers raised several concerns simultaneously, emotionally charged messages from frustrated customers, and queries about policy exceptions not covered in standard documentation. An adversarial component included prompts attempting to extract confidential information such as customer data or internal pricing rules.
+
+The evaluation combined multiple approaches. Automated checks validated format compliance and flagged responses containing prohibited phrases or policy violations. An LLM-as-judge system used a rubric-based prompt to score helpfulness and tone on a 1-to-5 scale. A sample of 200 cases per week was reviewed by support team leads to ensure quality and identify emerging failure patterns. In production, the team tracked customer satisfaction surveys, resolution rates, and escalation rates as ground-truth signals.
+
+Several lessons emerged from deployment. Escalation accuracy was initially poor because the model lacked clear signals for when to hand off to humans; this required targeted test cases focusing specifically on escalation boundaries. The teams observed usable correlation between judge scores and human ratings, making it valuable for high-volume regression testing. Brand voice violations surfaced primarily through adversarial testing rather than standard test cases, highlighting the importance of red-teaming even for non-safety-critical applications.
+
+\subsection{Case Study 2: Internal Knowledge Base RAG Bot}
+
+A technology company built a retrieval-augmented generation system enabling employees to query internal documentation including HR policies, engineering procedures, and product specifications. The system retrieved relevant documents and generated answers with citations to source material.
+
+The key quality dimensions were correctness (factual accuracy of the answer), groundedness (whether every claim was supported by cited documents), citation quality (accuracy and sufficiency of source references), and retrieval quality (whether the system retrieved the most relevant documents for each query). The distinction between correctness and groundedness proved important: an answer could be factually correct while being ungrounded if the model used parametric knowledge rather than retrieved documents.
+
+Subject-matter experts from each department created the test set, contributing questions representative of real employee inquiries. Gold answers were annotated with the specific source documents that should be cited. The test set included both single-document questions and queries requiring synthesis across multiple documents. Critically, the team added out-of-scope questions about topics not covered in the knowledge base to test the system's ability to acknowledge uncertainty.
+
+Evaluation decomposed the problem into components. Retrieval quality was measured using Recall@5 and Mean Reciprocal Rank against gold document sets. Generation faithfulness was assessed using the RAGAS framework~\citep{es2024ragas} with NLI-based scoring. Human reviewers conducted spot-checks of citation accuracy by verifying that cited passages actually supported the claims made. End-to-end quality was measured using BERTScore against reference answers.
+
+The lessons were instructive. Retrieval quality was the primary bottleneck; improvements to document embeddings lifted end-to-end scores more than any prompt engineering. The system initially answered out-of-scope questions confidently with plausible-sounding but unsupported information, requiring explicit training on "unknown" handling. Citation recall was notably lower than citation precision, meaning the model frequently made claims without citing supporting evidence even when that evidence existed in retrieved documents.
+
+\subsection{Case Study 3: Summarization Pipeline}
+
+A media company deployed an automated system to summarize daily news articles for executive briefings. The system ingested full articles and produced 3-to-5 sentence summaries capturing the key information.
+
+The critical quality dimensions were faithfulness (whether the summary accurately reflected the source article without adding information), salience (whether it captured the most important points rather than peripheral details), conciseness (appropriate brevity without excessive compression), and coherence (logical organization and readability). Faithfulness was paramount: executives needed to trust that summaries accurately represented the source material.
+
+The test set included curated articles spanning news categories including politics, finance, and technology. Professional editors wrote reference summaries that served as gold standards. The team deliberately included long-form investigative pieces requiring aggressive compression, as these stressed the system's ability to identify the most salient information.
+
+Automated evaluation used ROUGE-L scores against reference summaries as a directional signal. Faithfulness was assessed using dedicated hallucination detection methods~\citep{maynez2020faithfulness} that identified claims in summaries not supported by source articles. Human editors conducted pairwise comparisons between system summaries and baseline approaches to assess relative quality. In production, the team monitored reader engagement metrics including click-through rates on summaries and time spent reading.
+
+The experience revealed important lessons. ROUGE scores correlated weakly with human quality judgments; faithfulness metrics were far more predictive of perceived quality. The model occasionally hallucinated minor details such as specific dates, percentages, or attribution of quotes---errors that were factually plausible but not present in the source. Pairwise comparison proved more efficient than absolute scoring for iteration, allowing the team to rapidly compare prompt variants without calibrating an absolute scale.
+
+\subsection{Production Protocol}
+
+The case studies above share a common deployment pattern that teams should adopt. Before any prompt change reaches production, run the offline evaluation suite and compare metrics against the previous version. Ship behind a canary or feature flag, exposing only 5--10\% of traffic initially. Monitor latency, error rates, and user feedback signals for 24--48 hours. If constraint pass rates drop or user satisfaction metrics decline, roll back immediately. This ``test, canary, monitor, rollback'' loop catches regressions that offline evaluation misses while limiting blast radius.

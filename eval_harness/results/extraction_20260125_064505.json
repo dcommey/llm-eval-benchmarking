@@ -1,0 +1,999 @@
+{
+  "dataset": "extraction",
+  "model": "llama3:8b-instruct-q4_K_M",
+  "timestamp": "2026-01-25T06:45:05.452728",
+  "baseline": {
+    "aggregate": {
+      "total_cases": 20,
+      "all_checks_passed": 20,
+      "all_pass_rate": 1.0,
+      "total_checks": 44,
+      "checks_passed": 44,
+      "check_pass_rate": 1.0,
+      "mean_latency_ms": 4231.55
+    },
+    "results": [
+      {
+        "case_id": "ex-001",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 28928.75650001224,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted contact information in valid JSON format:\n\n```\n{\n    \"name\": \"Maya Chen\",\n    \"email\": \"maya.chen@northwind.com\",\n    \"phone\": \"+14155550199\",\n    \"company\": \"Northwind\"\n}\n```"
+      },
+      {
+        "case_id": "ex-002",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2964.946874999441,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted contact information in valid JSON format:\n\n```\n{\n  \"name\": \"Omar\",\n  \"email\": \"omar.k@riverstone.ai\",\n  \"phone\": null,\n  \"company\": null\n}\n```"
+      },
+      {
+        "case_id": "ex-003",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3623.1197500019334,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted invoice fields in valid JSON format:\n\n```\n{\n    \"invoice_id\": \"INV-8831\",\n    \"date\": \"2025-10-14\",\n    \"total_usd\": 1249.50,\n    \"vendor\": \"Acme Supplies\"\n}\n```"
+      },
+      {
+        "case_id": "ex-004",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3443.9558750018477,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted invoice fields in valid JSON format:\n\n```\n{\n    \"invoice_id\": \"77A-19\",\n    \"date\": \"03/02/2026\",\n    \"total_usd\": 89.0,\n    \"vendor\": \"Blue Harbor LLC\"\n}\n```"
+      },
+      {
+        "case_id": "ex-005",
+        "task_type": "extraction",
+        "category": "calendar",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 4010.4622499784455,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the converted calendar event JSON:\n\n```\n{\n    \"title\": \"Dentist appointment\",\n    \"date\": \"2026-02-08\",\n    \"start_time\": \"14:30:00\",\n    \"end_time\": \"15:15:00\",\n    \"location\": \"Lakeview Dent"
+      },
+      {
+        "case_id": "ex-006",
+        "task_type": "extraction",
+        "category": "calendar",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3746.4295829995535,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the converted calendar event JSON:\n\n```\n{\n    \"title\": \"Team sync\",\n    \"date\": \"2026-01-26\",\n    \"start_time\": \"09:00:00\",\n    \"end_time\": \"09:45:00\",\n    \"location\": \"Conf Room B\"\n}\n```"
+      },
+      {
+        "case_id": "ex-007",
+        "task_type": "extraction",
+        "category": "support_ticket",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3217.9686250165105,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted information in valid JSON format:\n\n```\n{\n    \"product\": \"mobile app\",\n    \"issue\": \"crashes on login after update 3.2.1\",\n    \"severity\": \"high\",\n    \"customer\": null\n}\n```"
+      },
+      {
+        "case_id": "ex-008",
+        "task_type": "extraction",
+        "category": "support_ticket",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2810.189374955371,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted information in valid JSON format:\n\n```\n{\n  \"product\": \"MegaMart\",\n  \"issue\": \"billing dashboard shows blank charts\",\n  \"severity\": \"medium\",\n  \"customer\": null\n}\n```"
+      },
+      {
+        "case_id": "ex-009",
+        "task_type": "extraction",
+        "category": "classification",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1580.988624948077,
+        "checks_passed": 4,
+        "checks_total": 4,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          },
+          {
+            "check": "allowed_values.intent",
+            "passed": true,
+            "message": "intent=refund"
+          },
+          {
+            "check": "allowed_values.urgency",
+            "passed": true,
+            "message": "urgency=high"
+          }
+        ],
+        "response_preview": "Here is the classification of the message intent:\n\n{\"intent\": \"refund\", \"urgency\": \"high\"}"
+      },
+      {
+        "case_id": "ex-010",
+        "task_type": "extraction",
+        "category": "classification",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1569.8508749483153,
+        "checks_passed": 4,
+        "checks_total": 4,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          },
+          {
+            "check": "allowed_values.intent",
+            "passed": true,
+            "message": "intent=sales"
+          },
+          {
+            "check": "allowed_values.urgency",
+            "passed": true,
+            "message": "urgency=low"
+          }
+        ],
+        "response_preview": "Here is the classification of the message intent:\n\n{\"intent\": \"sales\", \"urgency\": \"low\"}"
+      },
+      {
+        "case_id": "ex-011",
+        "task_type": "extraction",
+        "category": "numbers",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1841.5147499763407,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted numeric value in valid JSON format:\n\n```\n{\n    \"values\": [12, 7, 0]\n}\n```"
+      },
+      {
+        "case_id": "ex-012",
+        "task_type": "extraction",
+        "category": "numbers",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2007.911625027191,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted numeric value in valid JSON format:\n\n```\n{\n  \"values\": [1200000, 950000, 1050000]\n}\n```"
+      },
+      {
+        "case_id": "ex-013",
+        "task_type": "extraction",
+        "category": "policy",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2489.1369999968447,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted policy constraint in valid JSON format:\n\n```\n{\n  \"allowed\": [\"public pricing\", \"documentation links\"],\n  \"disallowed\": [\"internal roadmap dates\", \"customer PII\"]\n}\n```"
+      },
+      {
+        "case_id": "ex-014",
+        "task_type": "extraction",
+        "category": "policy",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2716.1384579958394,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted policy constraint in valid JSON format:\n\n```\n{\n  \"allowed\": [\"answer general questions about shipping times\"],\n  \"disallowed\": [\"request passwords\", \"request SSNs\", \"request cred"
+      },
+      {
+        "case_id": "ex-015",
+        "task_type": "extraction",
+        "category": "meeting_notes",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 6140.115374990273,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here are the action items in valid JSON format:\n\n{\n\"action_items\": [\n    {\n        \"owner\": \"Alex\",\n        \"task\": \"draft the proposal\",\n        \"due_date\": \"2026-01-29\"\n    },\n    {\n        \"owner\":"
+      },
+      {
+        "case_id": "ex-016",
+        "task_type": "extraction",
+        "category": "meeting_notes",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 4035.834416979924,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the summary in valid JSON:\n\n```\n{\n  \"action_items\": [\n    {\n      \"owner\": \"Jess\",\n      \"task\": \"send contract\",\n      \"due_date\": null\n    },\n    {\n      \"owner\": \"Marco\",\n      \"task\": \"upd"
+      },
+      {
+        "case_id": "ex-017",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1436.1546249710955,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted email address in valid JSON format:\n\n```\n{\n  \"email\": null\n}\n```"
+      },
+      {
+        "case_id": "ex-018",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 1588.2603750214912,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted email address in valid JSON format:\n\n```\n{\n  \"email\": \"support@example.com\"\n}\n```"
+      },
+      {
+        "case_id": "ex-019",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 2979.3974579661153,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted contact information in valid JSON format:\n\n```\n{\n  \"name\": \"Li Wei\",\n  \"email\": \"li.wei@uni.edu\",\n  \"phone\": null,\n  \"company\": \"University Lab\"\n}\n```"
+      },
+      {
+        "case_id": "ex-020",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 3499.840750009753,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "Here is the extracted invoice fields in valid JSON format:\n\n```\n{\n    \"invoice_id\": \"A-0001\",\n    \"date\": \"2026-01-01\",\n    \"total_usd\": 0,\n    \"vendor\": \"ACME\"\n}\n```"
+      }
+    ]
+  },
+  "improved": {
+    "aggregate": {
+      "total_cases": 20,
+      "all_checks_passed": 18,
+      "all_pass_rate": 0.9,
+      "total_checks": 44,
+      "checks_passed": 42,
+      "check_pass_rate": 0.9545,
+      "mean_latency_ms": 2481.69
+    },
+    "results": [
+      {
+        "case_id": "ex-001",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3085.481541987974,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n\"name\": \"Maya Chen\",\n\"email\": \"maya.chen@northwind.com\",\n\"phone\": \"+1 (415) 555-0199\",\n\"company\": \"Northwind\"\n}"
+      },
+      {
+        "case_id": "ex-002",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2032.8309999895282,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\":\"Omar\",\"email\":\"omar.k@riverstone.ai\",\"phone\":null,\"company\":null}"
+      },
+      {
+        "case_id": "ex-003",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3008.433042035904,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n\"invoice_id\": \"INV-8831\",\n\"date\": \"2025-10-14\",\n\"total_usd\": 1249.50,\n\"vendor\": \"Acme Supplies\"\n}"
+      },
+      {
+        "case_id": "ex-004",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3029.3397909845226,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n\"invoice_id\": \"77A-19\",\n\"date\": \"03/02/2026\",\n\"total_usd\": 89.0,\n\"vendor\": \"Blue Harbor LLC\"\n}"
+      },
+      {
+        "case_id": "ex-005",
+        "task_type": "extraction",
+        "category": "calendar",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3799.827874987386,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n    \"title\": \"Dentist appointment\",\n    \"date\": \"2026-02-08\",\n    \"start_time\": \"14:30:00\",\n    \"end_time\": \"15:15:00\",\n    \"location\": \"Lakeview Dental\"\n}"
+      },
+      {
+        "case_id": "ex-006",
+        "task_type": "extraction",
+        "category": "calendar",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3731.4337919815443,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n    \"title\": \"Team sync\",\n    \"date\": \"2026-01-31\",\n    \"start_time\": \"09:00:00\",\n    \"end_time\": \"09:45:00\",\n    \"location\": \"Conf Room B\"\n}"
+      },
+      {
+        "case_id": "ex-007",
+        "task_type": "extraction",
+        "category": "support_ticket",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2626.600082963705,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n\"product\": \"mobile app\",\n\"issue\": \"crashes on login after update 3.2.1\",\n\"severity\": \"high\",\n\"customer\": null\n}"
+      },
+      {
+        "case_id": "ex-008",
+        "task_type": "extraction",
+        "category": "support_ticket",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2340.9157909918576,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n\"product\": \"MegaMart\",\n\"issue\": \"billing dashboard shows blank charts\",\n\"severity\": \"medium\",\n\"customer\": null\n}"
+      },
+      {
+        "case_id": "ex-009",
+        "task_type": "extraction",
+        "category": "classification",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1429.2694589821622,
+        "checks_passed": 4,
+        "checks_total": 4,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          },
+          {
+            "check": "allowed_values.intent",
+            "passed": true,
+            "message": "intent=refund"
+          },
+          {
+            "check": "allowed_values.urgency",
+            "passed": true,
+            "message": "urgency=high"
+          }
+        ],
+        "response_preview": "{\"intent\":\"refund\",\"urgency\":\"high\"}"
+      },
+      {
+        "case_id": "ex-010",
+        "task_type": "extraction",
+        "category": "classification",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1393.0912080104463,
+        "checks_passed": 4,
+        "checks_total": 4,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          },
+          {
+            "check": "allowed_values.intent",
+            "passed": true,
+            "message": "intent=sales"
+          },
+          {
+            "check": "allowed_values.urgency",
+            "passed": true,
+            "message": "urgency=low"
+          }
+        ],
+        "response_preview": "{\"intent\":\"sales\",\"urgency\":\"low\"}"
+      },
+      {
+        "case_id": "ex-011",
+        "task_type": "extraction",
+        "category": "numbers",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1312.4461669940501,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"values\":[12, 7, 0]}"
+      },
+      {
+        "case_id": "ex-012",
+        "task_type": "extraction",
+        "category": "numbers",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1603.919625049457,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"values\":[1200000, 950000, 1050000]}"
+      },
+      {
+        "case_id": "ex-013",
+        "task_type": "extraction",
+        "category": "policy",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2217.9860419710167,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n    \"allowed\": [\"public pricing\", \"documentation links\"],\n    \"disallowed\": [\"internal roadmap dates\", \"customer PII\"]\n}"
+      },
+      {
+        "case_id": "ex-014",
+        "task_type": "extraction",
+        "category": "policy",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2199.942291015759,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n    \"allowed\": [\"shipping times\"],\n    \"disallowed\": [\"passwords\", \"SSNs\", \"credit card numbers\"]\n}"
+      },
+      {
+        "case_id": "ex-015",
+        "task_type": "extraction",
+        "category": "meeting_notes",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 4809.445500024594,
+        "checks_passed": 1,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": false,
+            "missing": [
+              "action_items"
+            ]
+          }
+        ],
+        "response_preview": "{\n\"action_items\": [\n{\n\"owner\": \"Alex\",\n\"task\": \"draft the proposal\",\n\"due_date\": \"2026-01-29\"\n},\n{\n\"owner\": \"Priya\",\n\"task\": \"review budget\",\n\"due_date\": null\n},\n{\n\"owner\": \"Sam\",\n\"task\": \"schedule ki"
+      },
+      {
+        "case_id": "ex-016",
+        "task_type": "extraction",
+        "category": "meeting_notes",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 3793.7716669985093,
+        "checks_passed": 1,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": false,
+            "missing": [
+              "action_items"
+            ]
+          }
+        ],
+        "response_preview": "{\n\"action_items\": [\n  {\n    \"owner\": \"Jess\",\n    \"task\": \"send contract\",\n    \"due_date\": null\n  },\n  {\n    \"owner\": \"Marco\",\n    \"task\": \"update onboarding doc\",\n    \"due_date\": null\n  }\n]"
+      },
+      {
+        "case_id": "ex-017",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1069.8864170117304,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"email\": null}"
+      },
+      {
+        "case_id": "ex-018",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 1139.37900000019,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"email\":\"support@example.com\"}"
+      },
+      {
+        "case_id": "ex-019",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2185.7566669932567,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\":\"Li Wei\",\"email\":\"li.wei@uni.edu\",\"phone\":null,\"company\":\"University Lab\"}"
+      },
+      {
+        "case_id": "ex-020",
+        "task_type": "extraction",
+        "category": "edge_case",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 2824.105291045271,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\n\"invoice_id\": \"A-0001\",\n\"date\": \"2026-01-01\",\n\"total_usd\": 0,\n\"vendor\": \"ACME\"\n}"
+      }
+    ]
+  },
+  "improvement": {
+    "all_pass_rate_delta": -0.1,
+    "check_pass_rate_delta": -0.0455
+  }
+}

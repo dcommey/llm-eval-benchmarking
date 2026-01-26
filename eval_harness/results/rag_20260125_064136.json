@@ -1,0 +1,155 @@
+{
+  "dataset": "rag",
+  "model": "llama3.1:8b",
+  "timestamp": "2026-01-25T06:41:36.724861",
+  "baseline": {
+    "aggregate": {
+      "total_cases": 3,
+      "all_checks_passed": 3,
+      "all_pass_rate": 1.0,
+      "total_checks": 3,
+      "checks_passed": 3,
+      "check_pass_rate": 1.0,
+      "mean_latency_ms": 120.0
+    },
+    "results": [
+      {
+        "case_id": "rag-001",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 120,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The warranty is 2 years [1]."
+      },
+      {
+        "case_id": "rag-002",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 120,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The warranty is 2 years [1]."
+      },
+      {
+        "case_id": "rag-003",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 120,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The warranty is 2 years [1]."
+      }
+    ]
+  },
+  "improved": {
+    "aggregate": {
+      "total_cases": 3,
+      "all_checks_passed": 3,
+      "all_pass_rate": 1.0,
+      "total_checks": 3,
+      "checks_passed": 3,
+      "check_pass_rate": 1.0,
+      "mean_latency_ms": 120.0
+    },
+    "results": [
+      {
+        "case_id": "rag-001",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 120,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The warranty is 2 years [1]."
+      },
+      {
+        "case_id": "rag-002",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 120,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The warranty is 2 years [1]."
+      },
+      {
+        "case_id": "rag-003",
+        "task_type": "rag_qa",
+        "category": "unknown",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 120,
+        "checks_passed": 1,
+        "checks_total": 1,
+        "check_details": [
+          {
+            "check": "must_cite",
+            "passed": true,
+            "citations": [
+              "[1]"
+            ]
+          }
+        ],
+        "response_preview": "The warranty is 2 years [1]."
+      }
+    ]
+  },
+  "improvement": {
+    "all_pass_rate_delta": 0.0,
+    "check_pass_rate_delta": 0.0
+  }
+}

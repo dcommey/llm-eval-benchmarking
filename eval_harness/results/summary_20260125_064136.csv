@@ -1,0 +1,4 @@
+Dataset,Cases,Baseline_AllPass%,Baseline_CheckPass%,Baseline_LatencyMs,Improved_AllPass%,Improved_CheckPass%,Improved_LatencyMs,Delta_AllPass,Delta_CheckPass
+extraction,3,66.7,83.3,100.0,66.7,83.3,100.0,0.0,0.0
+rag,3,100.0,100.0,120.0,100.0,100.0,120.0,0.0,0.0
+instruction,3,0.0,14.3,80.0,0.0,14.3,80.0,0.0,0.0

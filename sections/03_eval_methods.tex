@@ -1,0 +1,49 @@
+%% 03_eval_methods.tex - Evaluation Methods
+
+\section{Evaluation Methods}
+\label{sec:eval-methods}
+
+This section surveys the major approaches to LLM evaluation. The choice of method depends on output structure: if the output is structured (JSON, code), use deterministic schema checks. If the task involves retrieval, add citation and grounding tests. If the output is open-ended prose, use rubric-based human evaluation or LLM-as-judge.
+
+\subsection{Automated Offline Checks}
+
+Automated checks provide the fastest feedback signal. \textbf{Assertions} verify deterministic properties: JSON validity, presence of required keywords, or exclusion of prohibited terms. \textbf{Golden Set Evaluation} compares outputs against verified reference answers using semantic similarity metrics (BERTScore) or exact matching for extraction tasks.
+
+\textbf{Metamorphic testing} evaluates consistency without ground truth by checking that semantically equivalent inputs (e.g., paraphrased queries) yield consistent outputs. This detects brittleness even when "correct" answers are subjective~\citep{zhu2023promptbench}.
+
+\subsection{Human Evaluation}
+
+Human evaluation remains the gold standard for subjective dimensions. \textbf{Rubric scoring} assigns absolute ratings (1--5) based on explicit criteria, while \textbf{Pairwise preference} asks evaluators to choose the better of two responses. Pairwise comparison often yields higher inter-rater agreement than absolute scoring because it simplifies the cognitive task~\citep{zheng2023judging}.
+
+\subsection{Comparative Analysis}
+\label{sec:eval-tradeoffs}
+
+Table~\ref{tab:eval-tradeoffs} compares the utility of these methods. Automated metrics are fast but correlate weakly with human judgment on open-ended tasks. Human evaluation is accurate but expensive. LLM-as-judge (Section~\ref{sec:llm-judges}) offers a middle ground for regression testing.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\caption{Trade-offs in evaluation methods. Correlation coefficients are with human ground-truth labels.}
+\label{tab:eval-tradeoffs}
+\begin{tabular}{@{}p{2.5cm}ccccc@{}}
+\toprule
+\textbf{Method} & \textbf{Correlation} & \textbf{Cost/1k} & \textbf{Time} & \textbf{Regression} \\
+\midrule
+Human eval & 1.0 (baseline) & \$1000+ & Days & High \\
+LLM-as-judge & 0.70--0.85 & \$10--50 & Hours & Medium \\
+BERTScore & 0.40--0.60 & \$0.10 & Mins & Low \\
+Exact match & N/A & \$0.01 & Secs & High (Specific tasks) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Minimum Viable Evaluation Suite (MVES)}
+\label{sec:mves}
+
+We propose a tiered framework for evaluation rigor:
+
+\paragraph{MVES-Core (All Apps).} Every application requires a golden set of at least 100 stratified examples, covering edge cases (20\%) and adversarial inputs (10 prompt injection attempts). It must pass automated assertions for format and contain at least one semantic metric. A human baseline (50 examples) validates the automated signal.
+
+\paragraph{MVES-RAG (Retrieval-Based).} In addition to Core, RAG systems require retrieval metrics (Recall@5 $\geq$ 0.8) and faithfulness scoring (NLI or Judge). Explicit tests must check for ``correct but unsupported'' hallucinations and verify citation accuracy.
+
+\paragraph{MVES-Agentic (Tool-Use).} Agentic systems add trajectory evaluation (50 multi-step tasks), per-tool success rates, and sandboxed execution. High-stakes actions require human-in-the-loop validation during the test phase.

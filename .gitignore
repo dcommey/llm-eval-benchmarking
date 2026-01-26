@@ -1,0 +1,35 @@
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.dvi
+*.nav
+*.snm
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# Logs
+experiment.log
+*.log
+
+# Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Keep main.pdf as it is the final output
+!main.pdf

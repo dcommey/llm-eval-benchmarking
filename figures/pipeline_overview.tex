@@ -1,0 +1,111 @@
+%% pipeline_overview.tex - TikZ diagram of LLM Evaluation Pipeline
+
+% This file defines a figure that can be included in main.tex
+% Use: \input{figures/pipeline_overview}
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.2cm,
+    box/.style={
+        rectangle,
+        draw=blue!70!black,
+        fill=blue!10,
+        rounded corners,
+        minimum height=0.9cm,
+        minimum width=2cm,
+        text centered,
+        font=\small,
+        align=center
+    },
+    databox/.style={
+        rectangle,
+        draw=green!60!black,
+        fill=green!10,
+        rounded corners,
+        minimum height=0.7cm,
+        minimum width=1.8cm,
+        text centered,
+        font=\small,
+        align=center
+    },
+    evalbox/.style={
+        rectangle,
+        draw=orange!70!black,
+        fill=orange!10,
+        rounded corners,
+        minimum height=0.9cm,
+        minimum width=2cm,
+        text centered,
+        font=\small,
+        align=center
+    },
+    outputbox/.style={
+        rectangle,
+        draw=purple!70!black,
+        fill=purple!10,
+        rounded corners,
+        minimum height=0.9cm,
+        minimum width=2cm,
+        text centered,
+        font=\small,
+        align=center
+    },
+    arrow/.style={
+        ->,
+        >=stealth,
+        thick,
+        draw=gray!70
+    }
+]
+
+% Test Set
+\node[databox] (testset) {Test Set};
+
+% Optional: Retrieved Context for RAG
+\node[databox, below=0.6cm of testset] (context) {Retrieved Context};
+
+% LLM Application
+\node[box, right=1.2cm of testset] (llm) {LLM Application};
+
+% Output
+\node[box, right=1.2cm of llm] (output) {Generated Output};
+
+% Scoring Methods (branching)
+\node[evalbox, above right=0.4cm and 1.2cm of output] (automated) {Automated Metrics};
+\node[evalbox, right=1.2cm of output] (llmjudge) {LLM-as-Judge};
+\node[evalbox, below right=0.4cm and 1.2cm of output] (human) {Human Eval};
+
+% Aggregation
+\node[outputbox, right=1.2cm of llmjudge] (scores) {Quality Scores};
+
+% Dashboard/Reporting
+\node[outputbox, right=1.0cm of scores] (dashboard) {Dashboard};
+
+% Arrows
+\draw[arrow] (testset) -- (llm);
+\draw[arrow] (context) -| (llm);
+\draw[arrow] (llm) -- (output);
+\draw[arrow] (output) -- (automated);
+\draw[arrow] (output) -- (llmjudge);
+\draw[arrow] (output) -- (human);
+\draw[arrow] (automated) -- (scores);
+\draw[arrow] (llmjudge) -- (scores);
+\draw[arrow] (human) -- (scores);
+\draw[arrow] (scores) -- (dashboard);
+
+% Feedback loop
+\draw[arrow, dashed, bend left=40] (dashboard.south) to node[below, font=\footnotesize, text=gray] {Iterate} (testset.south);
+
+% Labels
+\node[above=0.1cm of testset, font=\footnotesize\bfseries, text=green!60!black] {Inputs};
+\node[above=0.1cm of llm, font=\footnotesize\bfseries, text=blue!70!black] {System};
+\node[above=0.1cm of llmjudge, font=\footnotesize\bfseries, text=orange!70!black] {Evaluation};
+\node[above=0.1cm of dashboard, font=\footnotesize\bfseries, text=purple!70!black] {Outputs};
+
+\end{tikzpicture}%
+}
+\caption{LLM Evaluation Pipeline Overview. Test inputs flow through the LLM application to generate outputs, which are scored by automated metrics, LLM judges, and/or human evaluators. Aggregated scores feed dashboards and inform iterative improvements.}
+\label{fig:pipeline-overview}
+\end{figure}

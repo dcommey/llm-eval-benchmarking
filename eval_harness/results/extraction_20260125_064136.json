@@ -1,0 +1,183 @@
+{
+  "dataset": "extraction",
+  "model": "llama3.1:8b",
+  "timestamp": "2026-01-25T06:41:36.724481",
+  "baseline": {
+    "aggregate": {
+      "total_cases": 3,
+      "all_checks_passed": 2,
+      "all_pass_rate": 0.6667,
+      "total_checks": 6,
+      "checks_passed": 5,
+      "check_pass_rate": 0.8333,
+      "mean_latency_ms": 100.0
+    },
+    "results": [
+      {
+        "case_id": "ex-001",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 100,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\": \"Test\", \"email\": \"test@test.com\", \"phone\": null, \"company\": null}"
+      },
+      {
+        "case_id": "ex-002",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 100,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\": \"Test\", \"email\": \"test@test.com\", \"phone\": null, \"company\": null}"
+      },
+      {
+        "case_id": "ex-003",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "baseline",
+        "success": true,
+        "latency_ms": 100,
+        "checks_passed": 1,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": false,
+            "missing": [
+              "invoice_id",
+              "date",
+              "total_usd",
+              "vendor"
+            ]
+          }
+        ],
+        "response_preview": "{\"name\": \"Test\", \"email\": \"test@test.com\", \"phone\": null, \"company\": null}"
+      }
+    ]
+  },
+  "improved": {
+    "aggregate": {
+      "total_cases": 3,
+      "all_checks_passed": 2,
+      "all_pass_rate": 0.6667,
+      "total_checks": 6,
+      "checks_passed": 5,
+      "check_pass_rate": 0.8333,
+      "mean_latency_ms": 100.0
+    },
+    "results": [
+      {
+        "case_id": "ex-001",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 100,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\": \"Test\", \"email\": \"test@test.com\", \"phone\": null, \"company\": null}"
+      },
+      {
+        "case_id": "ex-002",
+        "task_type": "extraction",
+        "category": "contact_info",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 100,
+        "checks_passed": 2,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": true,
+            "missing": []
+          }
+        ],
+        "response_preview": "{\"name\": \"Test\", \"email\": \"test@test.com\", \"phone\": null, \"company\": null}"
+      },
+      {
+        "case_id": "ex-003",
+        "task_type": "extraction",
+        "category": "invoice",
+        "prompt_version": "improved",
+        "success": true,
+        "latency_ms": 100,
+        "checks_passed": 1,
+        "checks_total": 2,
+        "check_details": [
+          {
+            "check": "json_valid",
+            "passed": true,
+            "message": "Valid JSON"
+          },
+          {
+            "check": "required_keys",
+            "passed": false,
+            "missing": [
+              "invoice_id",
+              "date",
+              "total_usd",
+              "vendor"
+            ]
+          }
+        ],
+        "response_preview": "{\"name\": \"Test\", \"email\": \"test@test.com\", \"phone\": null, \"company\": null}"
+      }
+    ]
+  },
+  "improvement": {
+    "all_pass_rate_delta": 0.0,
+    "check_pass_rate_delta": 0.0
+  }
+}

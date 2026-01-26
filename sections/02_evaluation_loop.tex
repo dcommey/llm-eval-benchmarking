@@ -1,0 +1,50 @@
+%% 02_evaluation_loop.tex - The Evaluation Loop (Tutorial-Style Core Section)
+
+\section{The Evaluation Loop}
+\label{sec:eval-loop}
+
+Effective LLM evaluation follows a structured iteration cycle. This section introduces a four-phase workflow that serves as the organizing principle for the remainder of this paper.
+
+\subsection{The Core Workflow}
+
+Traditional software testing verifies outputs against known correct answers. LLM applications complicate this model because outputs are often unstructured, subjective, or context-dependent. Nevertheless, a disciplined evaluation process remains essential.
+
+The evaluation loop consists of four phases applied repeatedly throughout development. In the \textbf{Define} phase, teams articulate quality requirements in testable terms. What constitutes acceptable output for this application? What failures are most costly? In the \textbf{Test} phase, the system is evaluated against a curated suite of inputs with known properties. In the \textbf{Diagnose} phase, failures are categorized to identify systematic patterns. In the \textbf{Fix} phase, prompts, retrieval logic, or model selection are adjusted based on the diagnosis. The cycle then repeats.
+
+This workflow differs from one-time benchmarking in two important ways. First, it treats evaluation as continuous rather than gated. Each prompt change or model update triggers re-evaluation. Second, it emphasizes failure analysis over aggregate metrics. Understanding why a case failed matters more than computing a single accuracy number.
+
+\subsection{Translating Requirements into Tests}
+
+Many LLM applications have implicit quality requirements that were never formalized. A customer support chatbot should be ``helpful'' and ``accurate,'' but what does this mean in testable terms?
+
+The translation process involves decomposing high-level requirements into concrete properties. Consider a chatbot that answers questions using a knowledge base. Helpful might translate to: responds within 5 seconds, provides actionable next steps, and avoids jargon. Accurate might translate to: all factual claims are supported by retrieved documents, dates and numbers match source material, and the system declines to answer when sources are insufficient.
+
+Each property then becomes a check in the evaluation harness. Some checks are fully automated (response latency, JSON validity, citation presence). Others require human judgment or LLM-as-judge scoring (helpfulness, clarity). The goal is to maximize coverage with automated checks while reserving human review for genuinely subjective dimensions.
+
+\subsection{The Role of Golden Sets}
+
+A golden set is a curated collection of inputs with known-good outputs or annotated properties. Unlike exhaustive test suites, golden sets prioritize coverage of failure modes over volume.
+
+Effective golden sets share several characteristics. They include representative examples from each major use case. They contain adversarial inputs designed to trigger known failure modes. They are version-controlled alongside the prompt templates they evaluate. They are small enough to run on every change (50-200 cases) but large enough to detect regressions with statistical confidence.
+
+The test suites used in Section~\ref{sec:experiments} demonstrate this approach. Twenty extraction cases cover contact parsing, invoice extraction, calendar events, and edge cases. Fifteen RAG cases span warranty questions, policy clarifications, and questions where sources are insufficient. The suites are intentionally compact to support rapid iteration.
+
+\subsection{Iteration in Practice}
+
+The evaluation loop accelerates development by providing immediate feedback on prompt changes. Without it, teams often discover failures in production, leading to reactive fixes and degraded user trust.
+
+Consider a scenario where a RAG application begins generating unsupported claims after a prompt update. With an evaluation loop in place, the team runs the golden set before deployment and observes a drop in citation compliance. They diagnose the issue: the new prompt's emphasis on helpfulness led the model to answer confidently even when sources were insufficient. They fix it by adding an explicit instruction to decline when evidence is lacking. They re-test to confirm the fix worked without introducing new regressions.
+
+This scenario illustrates why evaluation-driven iteration is more reliable than intuition-based prompt engineering. The loop catches regressions that would otherwise reach users, and the diagnosis step provides actionable insight rather than vague failure signals.
+
+\subsection{Connecting Offline and Online Evaluation}
+
+Offline evaluation (golden sets, unit tests) and online evaluation (production monitoring, A/B tests) serve complementary roles. Offline evaluation catches known failure modes before deployment. Online evaluation detects novel failures and distribution shifts that offline suites did not anticipate.
+
+The metrics defined in Section~\ref{sec:metrics-scoring} bridge these two contexts. The same checks that run in the evaluation harness (JSON validity, citation compliance, format constraints) can be logged in production. When online metrics diverge from offline baselines, the system signals potential regressions for investigation.
+
+The remainder of this paper elaborates each phase of the evaluation loop. Sections~\ref{sec:testset-design} through \ref{sec:metrics-scoring} address the Define phase. Sections~\ref{sec:eval-methods} and \ref{sec:llm-judges} address the Test phase. Section~\ref{sec:failure-modes} addresses the Diagnose phase. Section~\ref{sec:experiments} demonstrates the complete cycle with concrete before-and-after results.
+
+\begin{keytakeaways}
+The evaluation loop (Define-Test-Diagnose-Fix) replaces ad-hoc testing with systematic iteration. Golden sets catch regressions before deployment. Offline metrics validate changes rapidly, while online monitoring detects drift in the wild.
+\end{keytakeaways}

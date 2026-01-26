@@ -1,0 +1,70 @@
+%% 02_quality_taxonomy.tex - Quality Taxonomy
+
+\section{Quality Taxonomy}
+\label{sec:quality-taxonomy}
+
+Before designing evaluations, we must articulate what ``quality'' means for a given application. This section presents a taxonomy of quality dimensions commonly relevant to LLM applications. Different applications weight these dimensions differently, so teams should identify which dimensions matter most before investing in evaluation infrastructure.
+
+\subsection{Correctness}
+
+Correctness measures whether the LLM's output is factually accurate and logically sound. This dimension is paramount for applications involving factual claims, calculations, or procedural instructions. An output is considered correct if it accurately reflects ground truth, follows valid reasoning, and contains no factual errors.
+
+Correctness evaluation requires reference answers or verifiable facts. For question-answering tasks, this may involve comparing outputs against gold-standard answers. For reasoning tasks, evaluators must verify the logical chain. In practice, correctness is often the most tractable dimension to evaluate because it admits objective verification.
+
+\subsection{Helpfulness}
+
+Helpfulness measures whether the output actually assists the user in achieving their goal. An answer may be technically correct but unhelpful if it is incomplete, overly verbose, or misinterprets the user's intent. A helpful output addresses the user's underlying intent, provides actionable information, and is appropriately scoped to the question asked.
+
+Helpfulness is often subjective and context-dependent, making it well-suited for human evaluation or preference-based comparisons~\citep{ouyang2022training}. The RLHF training paradigm explicitly optimizes for human preferences on helpfulness, demonstrating the centrality of this dimension to modern LLM development.
+
+\subsection{Harmlessness}
+
+Harmlessness measures whether the output avoids causing harm through dangerous advice, toxic content, privacy violations, or manipulation. A harmless output does not promote violence, contain hate speech, reveal private information, or provide instructions for dangerous activities.
+
+The harmlessness dimension has received significant attention in the alignment literature. Constitutional AI~\citep{bai2022constitutional} provides frameworks for encoding safety constraints directly into model training. Evaluation for harmlessness typically involves adversarial testing with prompts designed to elicit harmful responses, combined with human review of edge cases.
+
+\subsection{Groundedness and Attribution}
+
+Groundedness measures whether claims made by the LLM can be traced to reliable sources. This dimension is especially important for RAG systems and applications where users expect cited evidence. An output is grounded if every factual claim can be attributed to a source in the provided context or a verifiable external reference.
+
+A response may be correct but ungrounded, meaning the claim is true but not supported by provided sources. Conversely, a response may be grounded but incorrect if the source itself is wrong or misinterpreted. The distinction is crucial for evaluating retrieval-augmented systems~\citep{min2023factscore}. Users of knowledge-intensive applications often care more about verifiability than mere correctness.
+
+\subsection{Refusal Correctness}
+
+LLMs are often designed to refuse certain requests, including those that are harmful, outside scope, or unanswerable given available information. Refusal correctness measures whether the model refuses appropriately. This dimension has two components: correct refusals (the model refuses requests it should refuse) and incorrect refusals, also called over-refusal (the model refuses benign requests it should answer).
+
+Over-refusal degrades user experience and can undermine trust. Evaluation should measure both false negatives (failure to refuse harmful requests) and false positives (refusing harmless requests). Finding the right balance requires careful test set design with both harmful prompts that should be refused and edge cases that appear problematic but are actually benign.
+
+\subsection{Format and Style Adherence}
+
+Many applications require outputs in specific formats such as JSON, Markdown, or particular tones or length constraints. Format adherence measures compliance with these structural requirements. An output demonstrates format adherence if it matches the specified structure, syntax, tone, and length constraints.
+
+Format violations may cause downstream parsing failures in programmatic applications or user dissatisfaction in conversational ones. This dimension is often tested with automated validators that check structural compliance before semantic evaluation begins.
+
+\subsection{Consistency}
+
+Consistency measures whether the model provides coherent answers across related queries and maintains positions stated earlier in a conversation. An output is consistent if it does not contradict itself, prior model statements in the conversation, or known facts about the domain.
+
+Evaluating consistency often requires multi-turn evaluation or metamorphic testing approaches. Inconsistency can be particularly problematic in conversational applications where users may ask follow-up questions that probe previously stated positions.
+
+\subsection{Mapping Dimensions to Applications}
+
+Different applications weight these dimensions differently. Table~\ref{tab:quality-dimensions} provides guidance on dimension importance across common application types.
+
+\begin{table}[h]
+\centering
+\caption{Quality dimension importance by application type.}
+\label{tab:quality-dimensions}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Application} & \textbf{Correct.} & \textbf{Helpful.} & \textbf{Harmless.} & \textbf{Grounded.} & \textbf{Format} \\
+\midrule
+Customer support   & Med  & High & High & Med  & Med \\
+Medical Q\&A       & High & High & High & High & Med \\
+Code generation    & High & High & Low  & Low  & High \\
+Creative writing   & Low  & High & Med  & Low  & Med \\
+RAG knowledge base & High & Med  & Med  & High & Med \\
+\bottomrule
+\end{tabular}
+\end{table}
+
